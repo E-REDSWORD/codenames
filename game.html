@@ -3,70 +3,97 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>كود نيمز REDSWORD — الغرفة</title>
+  <title>كود نيمز - الغرفة</title>
   <link rel="stylesheet" href="style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;600;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body data-page="game">
-  <header class="topbar">
-    <div>
-      <h2 class="room-title">غرفة: <span id="roomIdLabel">—</span></h2>
-      <div class="room-actions">
-        <button id="copyRoomBtn" class="btn small">نسخ رمز الغرفة</button>
-        <a id="shareLink" class="btn small" target="_blank" rel="noopener">فتح الغرفة برابط</a>
-      </div>
-    </div>
-    <div class="voice-actions">
-      <button id="toggleVoice" class="btn">🎤 انضمام/إخفاء الصوت</button>
-      <a id="openVoiceExternal" class="btn outline small" target="_blank" rel="noopener">فتح الصوت بنافذة</a>
-    </div>
-  </header>
-
-  <section id="voicePanel" class="voice-panel hidden">
-    <iframe id="jitsiFrame" class="voice-iframe"
-      src=""
-      allow="camera; microphone; fullscreen; clipboard-read; clipboard-write; display-capture; autoplay"
-      referrerpolicy="no-referrer">
-    </iframe>
-  </section>
-
-  <main class="layout">
-    <aside class="sidebar card">
-      <h3>اللاعبون</h3>
-      <ul id="playersList" class="players"></ul>
-      <div class="divider"></div>
-      <div id="hostControls" class="host-controls hidden">
-        <h4>تحكم المضيف</h4>
-        <button id="startGameBtn" class="btn primary">بدء الجولة</button>
-        <button id="nextPuzzleBtn" class="btn">السؤال التالي</button>
-        <p class="hint">المضيف هو أول من دخل الغرفة</p>
-      </div>
-    </aside>
-
-    <section class="game-area card">
-      <div class="puzzle-header">
-        <div>
-          <h3 id="puzzleTitle">—</h3>
-          <p id="puzzleClue" class="clue">—</p>
-        </div>
-        <div class="timer">
-          <span id="timerLabel">الوقت</span>
-          <strong id="timerValue">—</strong>
+  <div class="container">
+    <header class="topbar">
+      <div>
+        <h2 class="room-title"><i class="fas fa-door-open"></i> غرفة: <span id="roomIdLabel">—</span></h2>
+        <div class="room-actions">
+          <button id="copyRoomBtn" class="btn small"><i class="fas fa-copy"></i> نسخ رمز الغرفة</button>
         </div>
       </div>
-
-      <div class="answer-area">
-        <input id="answerInput" type="text" placeholder="اكتب إجابتك هنا" />
-        <button id="submitAnswerBtn" class="btn primary">إرسال</button>
+      
+      <div class="voice-controls">
+        <div class="mic-control">
+          <button id="muteBtn" class="mic-btn">
+            <i class="fas fa-microphone"></i>
+          </button>
+          <span>الميكروفون</span>
+        </div>
+        <input id="volumeSlider" type="range" class="volume-slider" min="0" max="1" step="0.1" value="0.8">
       </div>
+    </header>
 
-      <div id="feedback" class="feedback"></div>
-    </section>
-  </main>
+    <div class="layout">
+      <aside class="sidebar">
+        <div class="card">
+          <h3><i class="fas fa-users"></i> اللاعبون</h3>
+          <ul id="playersList" class="players"></ul>
+        </div>
+        
+        <div class="card">
+          <div class="score-board">
+            <div class="score-item red-team">
+              <span class="score-value" id="redScore">0</span>
+              <span class="score-label">أحمر</span>
+            </div>
+            <div class="score-item blue-team">
+              <span class="score-value" id="blueScore">0</span>
+              <span class="score-label">أزرق</span>
+            </div>
+          </div>
+        </div>
+        
+        <div id="hostControls" class="card host-controls hidden">
+          <h4><i class="fas fa-crown"></i> تحكم المضيف</h4>
+          <button id="startGameBtn" class="btn primary"><i class="fas fa-play"></i> بدء الجولة</button>
+          <button id="restartGameBtn" class="btn"><i class="fas fa-redo"></i> إعادة اللعبة</button>
+          <p class="hint">المضيف هو مدير اللعبة</p>
+        </div>
+        
+        <div class="card">
+          <button id="toggleSpymasterBtn" class="btn outline"><i class="fas fa-eye"></i> تبديل عرض القائد</button>
+          <p class="hint">عرض القائد يظهر أدوار الكلمات (للقادة فقط)</p>
+        </div>
+      </aside>
 
-  <footer class="footer">
-    <small>كود نيمز REDSWORD — الإصدار التجريبي</small>
-  </footer>
+      <section class="game-area">
+        <div class="card">
+          <div class="puzzle-header">
+            <div id="teamTurnIndicator" class="red">دور: الفريق الأحمر</div>
+            <p id="currentHint" class="clue">لا توجد تلميحات بعد</p>
+          </div>
+
+          <div id="hintForm" class="hint-form hidden">
+            <input id="hintInput" type="text" placeholder="كلمة التلميح" />
+            <input id="hintCountInput" type="number" min="1" placeholder="عدد الكلمات" />
+            <button id="submitHintBtn" class="btn primary">إرسال التلميح</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <div id="boardContainer" class="code-board"></div>
+        </div>
+
+        <div class="card">
+          <div class="game-rules">
+            <h4><i class="fas fa-info-circle"></i> كيفية اللعب</h4>
+            <ul>
+              <li>يقود كل فريق <strong>قائد</strong> يعطي تلميحات لفريقه</li>
+              <li>التلميح يكون <strong>كلمة واحدة</strong> و<strong>رقم</strong> يشير لعدد الكلمات المرتبطة</li>
+              <li>يهدف كل فريق إلى اكتشاف جميع كلمات فريقه قبل الفريق الآخر</li>
+              <li>احذر من الكلمة <strong class="assassin">القاتلة</strong> التي تخسر بها اللعبة فورًا!</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
 
   <script type="module" src="script.js"></script>
 </body>
