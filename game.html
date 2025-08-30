@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>كود نيمز REDSWORD — الغرفة</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;600;800&display=swap" rel="stylesheet">
+</head>
+<body data-page="game">
+  <header class="topbar">
+    <div>
+      <h2 class="room-title">غرفة: <span id="roomIdLabel">—</span></h2>
+      <div class="room-actions">
+        <button id="copyRoomBtn" class="btn small">نسخ رمز الغرفة</button>
+        <a id="shareLink" class="btn small" target="_blank" rel="noopener">فتح الغرفة برابط</a>
+      </div>
+    </div>
+    <div class="voice-actions">
+      <button id="toggleVoice" class="btn">🎤 انضمام/إخفاء الصوت</button>
+      <a id="openVoiceExternal" class="btn outline small" target="_blank" rel="noopener">فتح الصوت بنافذة</a>
+    </div>
+  </header>
+
+  <section id="voicePanel" class="voice-panel hidden">
+    <iframe id="jitsiFrame" class="voice-iframe"
+      src=""
+      allow="camera; microphone; fullscreen; clipboard-read; clipboard-write; display-capture; autoplay"
+      referrerpolicy="no-referrer">
+    </iframe>
+  </section>
+
+  <main class="layout">
+    <aside class="sidebar card">
+      <h3>اللاعبون</h3>
+      <ul id="playersList" class="players"></ul>
+      <div class="divider"></div>
+      <div id="hostControls" class="host-controls hidden">
+        <h4>تحكم المضيف</h4>
+        <button id="startGameBtn" class="btn primary">بدء الجولة</button>
+        <button id="nextPuzzleBtn" class="btn">السؤال التالي</button>
+        <p class="hint">المضيف هو أول من دخل الغرفة</p>
+      </div>
+    </aside>
+
+    <section class="game-area card">
+      <div class="puzzle-header">
+        <div>
+          <h3 id="puzzleTitle">—</h3>
+          <p id="puzzleClue" class="clue">—</p>
+        </div>
+        <div class="timer">
+          <span id="timerLabel">الوقت</span>
+          <strong id="timerValue">—</strong>
+        </div>
+      </div>
+
+      <div class="answer-area">
+        <input id="answerInput" type="text" placeholder="اكتب إجابتك هنا" />
+        <button id="submitAnswerBtn" class="btn primary">إرسال</button>
+      </div>
+
+      <div id="feedback" class="feedback"></div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <small>كود نيمز REDSWORD — الإصدار التجريبي</small>
+  </footer>
+
+  <script type="module" src="script.js"></script>
+</body>
+</html>
