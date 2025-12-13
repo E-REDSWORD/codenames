@@ -1,72 +1,1139 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>كود نيمز - لعبة التخمين الاستراتيجية</title>
-  <link rel="stylesheet" href="style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>كود نيمز - REDSWORD | المضيف</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #0f1419;
+            color: #f0f0f0;
+            line-height: 1.6;
+            padding: 10px;
+            min-height: 100vh;
+            background-image: linear-gradient(to bottom, #0f1419, #1a1f2e);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        /* رأس الموقع */
+        header {
+            text-align: center;
+            padding: 15px 0;
+            border-bottom: 2px solid #2a3b5c;
+            margin-bottom: 15px;
+            position: relative;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 5px;
+        }
+        
+        .logo-icon {
+            color: #ff4757;
+            font-size: 1.8rem;
+        }
+        
+        .logo-text {
+            font-size: 1.6rem;
+            font-weight: 700;
+            background: linear-gradient(to right, #ff4757, #2ed573);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        }
+        
+        .subtitle {
+            color: #a0aec0;
+            font-size: 0.9rem;
+            margin-top: 3px;
+        }
+        
+        /* قسم التحكم */
+        .control-panel {
+            background-color: #1e293b;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+            border: 1px solid #2d3748;
+        }
+        
+        .control-title {
+            color: #2ed573;
+            font-size: 1.2rem;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .control-title i {
+            font-size: 1rem;
+        }
+        
+        .button-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .btn {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            flex: 1;
+            min-width: 150px;
+        }
+        
+        .btn-primary {
+            background-color: #ff4757;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: #ff3742;
+            transform: translateY(-2px);
+            box-shadow: 0 3px 10px rgba(255, 71, 87, 0.3);
+        }
+        
+        .btn-secondary {
+            background-color: #2d3748;
+            color: #f0f0f0;
+        }
+        
+        .btn-secondary:hover {
+            background-color: #4a5568;
+            transform: translateY(-2px);
+        }
+        
+        .btn-success {
+            background-color: #2ed573;
+            color: white;
+        }
+        
+        .btn-success:hover {
+            background-color: #26c464;
+            transform: translateY(-2px);
+            box-shadow: 0 3px 10px rgba(46, 213, 115, 0.3);
+        }
+        
+        .team-selector {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .selector-title {
+            color: #a0aec0;
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+        
+        .radio-group {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .radio-option {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+            padding: 8px 12px;
+            border-radius: 6px;
+            background-color: #2d3748;
+            transition: all 0.2s ease;
+            flex: 1;
+            min-width: 120px;
+        }
+        
+        .radio-option:hover {
+            background-color: #4a5568;
+        }
+        
+        .radio-option.selected {
+            background-color: #3b4a63;
+            border: 1px solid #ff4757;
+        }
+        
+        .radio-dot {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            border: 1px solid #a0aec0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .radio-option.selected .radio-dot {
+            border-color: #ff4757;
+        }
+        
+        .radio-option.selected .radio-dot::after {
+            content: "";
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: #ff4757;
+        }
+        
+        .team-red .radio-label {
+            color: #ff6b6b;
+        }
+        
+        .team-blue .radio-label {
+            color: #4dabf7;
+        }
+        
+        /* لوحة الكلمات - مصغرة */
+        .words-board {
+            background-color: #1e293b;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+            border: 1px solid #2d3748;
+        }
+        
+        .board-title {
+            color: #2ed573;
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .board-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 6px;
+        }
+        
+        @media (max-width: 768px) {
+            .board-grid {
+                grid-template-columns: repeat(5, 1fr);
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .board-grid {
+                grid-template-columns: repeat(5, 1fr);
+            }
+        }
+        
+        @media (max-width: 360px) {
+            .board-grid {
+                grid-template-columns: repeat(5, 1fr);
+            }
+        }
+        
+        .word-card {
+            background-color: #2d3748;
+            border-radius: 5px;
+            padding: 5px 3px;
+            text-align: center;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            user-select: none;
+            position: relative;
+            overflow: hidden;
+            aspect-ratio: 1 / 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid transparent;
+            word-break: break-word;
+            line-height: 1.1;
+            flex-wrap: wrap;
+            overflow: hidden;
+            font-size: 0.85rem;
+        }
+        
+        /* للكلمات الطويلة المفردة - تقليل حجم الخط تدريجياً */
+        .word-card.long-word {
+            font-size: 0.75rem;
+        }
+        
+        .word-card.very-long-word {
+            font-size: 0.65rem;
+        }
+        
+        /* للكلمات المتعددة - عرض عمودي */
+        .word-card.multi-word {
+            flex-direction: column;
+            justify-content: center;
+            font-size: 0.75rem;
+        }
+        
+        .word-card.multi-word span {
+            display: block;
+            line-height: 1;
+        }
+        
+        .word-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .word-card.selected {
+            border-color: #f0f0f0;
+        }
+        
+        .word-card.red {
+            background-color: #c53030;
+            color: white;
+        }
+        
+        .word-card.blue {
+            background-color: #2b6cb0;
+            color: white;
+        }
+        
+        .word-card.yellow {
+            background-color: #d69e2e;
+            color: white;
+        }
+        
+        .word-card.black {
+            background-color: #2d3748;
+            color: white;
+        }
+        
+        .word-card.revealed.red {
+            background-color: #fed7d7;
+            color: #c53030;
+        }
+        
+        .word-card.revealed.blue {
+            background-color: #bee3f8;
+            color: #2b6cb0;
+        }
+        
+        .word-card.revealed.yellow {
+            background-color: #feebc8;
+            color: #d69e2e;
+        }
+        
+        .word-card.revealed.black {
+            background-color: #2d3748;
+            color: #a0aec0;
+        }
+        
+        .word-card.revealed::after {
+            content: "";
+            position: absolute;
+            top: 2px;
+            right: 2px;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.5rem;
+            font-weight: bold;
+        }
+        
+        .word-card.revealed.red::after {
+            content: "🔴";
+        }
+        
+        .word-card.revealed.blue::after {
+            content: "🔵";
+        }
+        
+        .word-card.revealed.yellow::after {
+            content: "🟡";
+        }
+        
+        .word-card.revealed.black::after {
+            content: "⚫";
+        }
+        
+        /* تحسين للهواتف */
+        @media (max-width: 480px) {
+            .word-card.long-word {
+                font-size: 0.7rem;
+            }
+            
+            .word-card.very-long-word {
+                font-size: 0.6rem;
+            }
+            
+            .word-card.multi-word {
+                font-size: 0.7rem;
+            }
+            
+            .word-card.multi-word span {
+                line-height: 0.95;
+            }
+            
+            .word-card.revealed::after {
+                width: 12px;
+                height: 12px;
+                top: 1px;
+                right: 1px;
+                font-size: 0.4rem;
+            }
+        }
+        
+        /* لوحة المعلومات */
+        .info-panel {
+            background-color: #1e293b;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+            border: 1px solid #2d3748;
+        }
+        
+        .info-title {
+            color: #2ed573;
+            font-size: 1.2rem;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .game-status {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 15px;
+        }
+        
+        .status-card {
+            background-color: #2d3748;
+            border-radius: 8px;
+            padding: 12px;
+            flex: 1;
+            min-width: 140px;
+        }
+        
+        .status-title {
+            color: #a0aec0;
+            font-size: 0.8rem;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .status-value {
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+        
+        .status-value.red {
+            color: #ff6b6b;
+        }
+        
+        .status-value.blue {
+            color: #4dabf7;
+        }
+        
+        .status-value.turn {
+            color: #2ed573;
+        }
+        
+        /* تنبيهات */
+        .alert {
+            padding: 12px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            animation: fadeIn 0.5s ease;
+            font-size: 0.9rem;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .alert-success {
+            background-color: rgba(46, 213, 115, 0.15);
+            border: 1px solid rgba(46, 213, 115, 0.3);
+            color: #2ed573;
+        }
+        
+        .alert-danger {
+            background-color: rgba(255, 107, 107, 0.15);
+            border: 1px solid rgba(255, 107, 107, 0.3);
+            color: #ff6b6b;
+        }
+        
+        .alert-warning {
+            background-color: rgba(214, 158, 46, 0.15);
+            border: 1px solid rgba(214, 158, 46, 0.3);
+            color: #d69e2e;
+        }
+        
+        .alert-info {
+            background-color: rgba(77, 171, 247, 0.15);
+            border: 1px solid rgba(77, 171, 247, 0.3);
+            color: #4dabf7;
+        }
+        
+        .alert i {
+            font-size: 1rem;
+        }
+        
+        /* تذييل الصفحة */
+        footer {
+            text-align: center;
+            padding: 15px;
+            color: #a0aec0;
+            font-size: 0.8rem;
+            border-top: 1px solid #2a3b5c;
+            margin-top: 15px;
+        }
+        
+        .copyright {
+            margin-top: 8px;
+        }
+        
+        /* تأثيرات للعبة */
+        .win-animation {
+            animation: pulse 1.5s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        /* تحسينات للهواتف */
+        @media (max-width: 576px) {
+            .logo-text {
+                font-size: 1.4rem;
+            }
+            
+            .btn {
+                min-width: 100%;
+                font-size: 0.85rem;
+                padding: 8px 12px;
+            }
+            
+            .radio-option {
+                min-width: calc(50% - 10px);
+                font-size: 0.85rem;
+            }
+            
+            .board-grid {
+                gap: 5px;
+            }
+            
+            .word-card {
+                padding: 4px px;
+            }
+            
+            .status-card {
+                min-width: calc(50% - 6px);
+                padding: 10px;
+            }
+            
+            .status-value {
+                font-size: 1rem;
+            }
+        }
+    </style>
 </head>
-<body data-page="index">
-  <div class="container">
-    <header class="header">
-      <div class="logo">
-        <i class="fas fa-crosshairs"></i>
-        <h1>كود نيمز <span class="brand">REDSWORD</span></h1>
-      </div>
-      <p class="subtitle">لعبة التخمين الاستراتيجية - العب مع الأصدقاء عبر الإنترنت</p>
-    </header>
-
-    <main class="main-content">
-      <div class="card intro-card">
-        <div class="form-group">
-          <label for="playerName"><i class="fas fa-user"></i> اسم اللاعب</label>
-          <input id="playerName" type="text" placeholder="اكتب اسمك هنا" maxlength="20" />
-        </div>
-
-        <div class="action-buttons">
-          <div class="action-card">
-            <div class="action-icon">
-              <i class="fas fa-plus-circle"></i>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <div class="logo-icon">⚔️</div>
+                <div class="logo-text">ألعاب - REDSWORD</div>
             </div>
-            <h3>إنشاء غرفة جديدة</h3>
-            <button id="createRoomBtn" class="btn primary">إنشاء غرفة</button>
-            <p class="hint">ستصبح قائد الفريق وتبدأ اللعبة</p>
-          </div>
-
-          <div class="action-card">
-            <div class="action-icon">
-              <i class="fas fa-user-friends"></i>
-            </div>
-            <h3>الانضمام لغرفة</h3>
-            <div class="form-inline">
-              <input id="joinRoomId" type="text" placeholder="أدخل رمز الغرفة" />
-              <button id="joinRoomBtn" class="btn">انضمام</button>
-            </div>
-            <p class="hint">اطلب رمز الغرفة من صاحبها</p>
-          </div>
+            <div class="subtitle">لوحة تحكم المضيف - لعبة كود نيمز</div>
+        </header>
+        
+        <div class="alert alert-success" id="copy-alert" style="display: none;">
+            <i class="fas fa-check-circle"></i>
+            <span>تم نسخ النص بنجاح!</span>
         </div>
-
-        <div class="game-rules">
-          <h3><i class="fas fa-graduation-cap"></i> كيفية اللعب</h3>
-          <ul>
-            <li>يقسم اللاعبون إلى فريقين: <span class="red-team">أحمر</span> و<span class="blue-team">أزرق</span></li>
-            <li>يختار كل فريق قائدًا يعطي تلميحات لفريقه</li>
-            <li>يهدف كل فريق إلى اكتشاف جميع كلمات فريقه قبل الفريق الآخر</li>
-            <li>احذر من الكلمة القاتلة التي تخسر بها اللعبة فورًا!</li>
-          </ul>
+        
+        <div class="control-panel">
+            <h2 class="control-title"><i class="fas fa-gamepad"></i> لوحة تحكم المضيف</h2>
+            
+            <div class="button-container">
+                <button class="btn btn-primary" id="new-game-btn">
+                    <i class="fas fa-plus-circle"></i> بدء لعبة جديدة
+                </button>
+                <button class="btn btn-secondary" id="copy-players-btn">
+                    <i class="fas fa-copy"></i> نسخ خريطة اللاعبين
+                </button>
+                <button class="btn btn-secondary" id="copy-spymaster-btn">
+                    <i class="fas fa-user-secret"></i> نسخ خريطة الجواسيس
+                </button>
+                <button class="btn btn-success" id="reset-game-btn">
+                    <i class="fas fa-redo"></i> إعادة تعيين
+                </button>
+            </div>
+            
+            <div class="team-selector">
+                <div class="selector-title">الفريق صاحب الدور الحالي:</div>
+                <div class="radio-group">
+                    <div class="radio-option team-red selected" id="team-red-option">
+                        <div class="radio-dot"></div>
+                        <div class="radio-label">الفريق الأحمر</div>
+                    </div>
+                    <div class="radio-option team-blue" id="team-blue-option">
+                        <div class="radio-dot"></div>
+                        <div class="radio-label">الفريق الأزرق</div>
+                    </div>
+                </div>
+            </div>
         </div>
+        
+        <div class="words-board">
+            <h2 class="board-title"><i class="fas fa-map"></i> خريطة الكلمات (24 كلمة)</h2>
+            <div class="board-grid" id="words-grid">
+                <!-- سيتم ملئ الكلمات هنا بواسطة JavaScript -->
+            </div>
+        </div>
+        
+        <div class="info-panel">
+            <h2 class="info-title"><i class="fas fa-info-circle"></i> حالة اللعبة</h2>
+            
+            <div class="game-status">
+                <div class="status-card">
+                    <div class="status-title">الفريق الأحمر</div>
+                    <div class="status-value red" id="red-count">8</div>
+                </div>
+                <div class="status-card">
+                    <div class="status-title">الفريق الأزرق</div>
+                    <div class="status-value blue" id="blue-count">8</div>
+                </div>
+                <div class="status-card">
+                    <div class="status-title">الدور الحالي</div>
+                    <div class="status-value turn" id="current-turn">🔴</div>
+                </div>
+                <div class="status-card">
+                    <div class="status-title">الكلمات المتبقية</div>
+                    <div class="status-value" id="remaining-words">24</div>
+                </div>
+            </div>
+            
+            <div class="alert alert-info" id="game-alert">
+                <i class="fas fa-info-circle"></i>
+                <span>انقر على "بدء لعبة جديدة" لبدء الجولة الأولى!</span>
+            </div>
+        </div>
+        
+        <footer>
+            <div>ألعاب - REDSWORD | لعبة كود نيمز - نسخة المضيف</div>
+            <div class="copyright">© 2025 جميع الحقوق محفوظة. تم التصميم للاستخدام الحصري للمضيف.</div>
+        </footer>
+    </div>
 
-        <p id="indexError" class="error"></p>
-      </div>
-    </main>
+    <script>
+        // قاعدة بيانات الكلمات (باستخدام الكلمات المرفوعة)
+        const wordsDatabase = [
+"صحراء","مدينة","قرية","منزل","شارع","سيارة","طائرة","قطار","دراجة","كتاب",
+"قصة","رواية","شعر","أدب","فن","موسيقى","رسم","صورة","لون","فرشاة",
+"كاميرا","فيلم","مسرح","رقص","غناء","طعام","شراب","فاكهة","خضار","لحم",
+"سمك","خبز","جبن","قهوة","شاي","عصير","حليب","سكر","ملح","فلفل",
+"زيت","رياضة","كرة","ملعب","فريق","مباراة","هدف","جائزة","تحدي","عائلة",
+"أب","أم","أخ","أخت","جد","جدة","طفل","مدرسة","جامعة","طالب",
+"معلم","دفتر","قلم","ممحاة","عمل","وظيفة","مكتب","شركة","رئيس","موظف",
+"راتب","إجازة","صحة","مرض","دواء","مستشفى","طبيب","ممرض","جراحة","علاج",
+"سفر","رحلة","فندق","مطار","جواز","تذكرة","حقيبة","زمن","وقت","تاريخ",
+"مستقبل","حاضر","ماضي","عام","شهر","أسبوع","يوم","ساعة","دقيقة","ثانية",
+"صباح","مساء","صيف","شتاء","ربيع","خريف","حار","بارد","دافئ","طويل",
+"قصير","كبير","صغير","سمين","نحيف","قوي","ضعيف","سعيد","حزين","فرح",
+"غضب","خوف","أمل","حب","كراهية","صداقة","عداوة","ثقة","شك","نجاح",
+"فشل","حظ","قدر","علم","معرفة","تفكير","ذاكرة","فهم","جهل","سؤال",
+"جواب","قرار","خطة","هدف","حلم","واقع","خيال","ابتكار","اكتشاف","سرعة",
+"بطء","سهولة","صعوبة","بساطة","تعقيد","بداية","نهاية","موسم","مهرجان","احتفال",
+"عيد","هدية","مفاجأة","سر","خطر","شجاعة","حكمة","جنون","صمت","وعد",
+"قانون","آثار","معبد","مسجد","كنيسة","سوق","مرفأ","مقبرة","قلعة","مكتبة",
+"مستودع","مزرعة","مرصد","سينما","حديقة","متنزه","مركز","مصنع","ورشة","متجر",
+"بازار","زقاق","ساحة","جسر","نهر","واحة","جبل","تل","سهل","وادي",
+"غابة","شجرة","زهرة","ورد","نخلة","صبار","لوتس","أرز","نبات","عشب",
+"جذع","ورق","بذرة","ثمرة","جذور","طين","رمل","حجر","صخرة","كهف",
+"شاطئ","بحر","محيط","موج","شمس","قمر","نجمة","سماء","سحابة","مطر",
+"ثلج","برق","رعد","ضباب","زوبعة","بركان","هزة","مد","جزر","توازن",
+"استثمار","ويب","الروليت","فاتورة","منشفة","فطيرة","مقلاة","مصباح","مفتاح","مرآة",
+"مطرقة","محراث","مسطرة","محفظة","منديل","مرجل","مصعد","مروحة","مغناطيس","محبرة",
+"نجار","حداد","خياط","صيدلي","محام","قاض","مترجم","مزارع","بحار","طيار",
+"مصمم","مبرمج","مصور","مغن","مهندس","سائق","نادل","ممرض","قطة","كلب",
+"حصان","نمر","غزال","ببغاء","سنجاب","قنفذ","تمساح","دلفين","حوت","سلحفاة",
+"عقرب","ثعلب","ذئب","نخيل","سرو","لبلاب","أقحوان","بندق","زيتون","ليمون",
+"تفاح","برتقال","موز","عنب","رمان","خوخ","مشمش","فراولة","كيوي","أناناس",
+"جوز","لوز","عدس","حمص","فول","رز","معكرونة","بيتزا","برغر","سوشي",
+"شاورما","فلافل","كسكسي","بسبوسة","كنافة","مربى","عسل","لبنة","مخلل","بطاطس",
+"سلطة","حساء","مقبلات","حلويات","آيسكريم","ماء","ثلاجة","فرن","موقد","مغسلة",
+"صحن","شوكة","سكين","ملعقة","كوب","زجاجة","علبة","صندوق","رف","خزانة",
+"سرير","كرسي","طاولة","أريكة","وسادة","بطانية","مكتب","حاسوب","لابتوب","هاتف",
+"سماعة","طابعة","راوتر","شبكة","موقع","تطبيق","بريد","خادم","برمجة","خوارزمية",
+"ذكاء","روبوت","سياسة","حكومة","انتخابات","دستور","برلمان","وزير","رئيس","دبلوماسية",
+"سفارة","اقتصاد","سوق","سهم","بنك","عملة","ميزانية","ضرائب","تجارة","مشروع",
+"شركة","عقد","اتفاق","توظيف","تدريب","مهارة","خبرة","سيرة","مقابلة","ترقية",
+"تقاعد","معاش","إعلام","صحافة","مقال","خبر","مذيع","قناة","راديو","تلفاز",
+"مدونة","بودكاست","مسرحية","عرض","معرض","متحف","مؤتمر","ندوة","ورشة","بحث",
+"مختبر","عينة","بيانات","إحصاء","نظرية","فرضية","نتيجة","استنتاج","فيزياء","كيمياء",
+"أحياء","رياضيات","هندسة","طب","زراعة","بيئة","مناخ","تلوث","تدوير","طاقة",
+"مياه","ري","سد","فيض","جفاف","زلزال","إعصار","كارثة","إغاثة","تطوع",
+"منظمة","جمعية","تبرع","حملة","احتجاج","مسيرة","حقوق","عدالة","مساواة","حرية",
+"ديمقراطية","تسامح","تعايش","ثقافة","تراث","لغة","لهجة","أمثال","أغنية","رقصة",
+"زي","مطبخ","عادات","تقاليد","زواج","ولادة","جنازة","ذكرى","علم","نشيد",
+"حدود","هجرة","لاجئ","مهاجر","جنسية","هوية","عنوان","خريطة","بوصلة","اتجاه",
+"مسافة","سرعة","وقود","محرك","بطارية","شاحن","كهرباء","مقبس","أسلاك","مفك",
+"مسمار","برغي","قفل","حافلة","شاحنة","مترو","ترام","قارب","يخت","منارة",
+"مخيم","خيمة","نار","شواء","تخييم","دليل","مرشد","خدمة","شكاوى","مراجعات",
+"تقييم","مؤشر","مقياس","كاميرا","إنذار","حريق","طفاية","إسعاف","شرطة","محطة",
+"جراج","موقف","رخصة","إشارة","ممر","مخرج","مدخل","نفق","طريق","دائري",
+"ميدان","تمثال","نصب","أرشيف","وثيقة","مخطوطة","صك","شهادة","دبلوم","ماجستير",
+"دكتوراه","مقال","مرجع","فهرس","مؤلف","ناشر","محرر","مترجم","حلقة","موسم",
+"مخرج","ممثل","ممثلة","كوميديا","دراما","رعب","خيال","أنمي","كوميك","ملصق",
+"إعلان","شعار","تصميم","خط","طباعة","ورق","حبر","مغلف","طابع","تذكار",
+"هدية","ميدالية","شهادة","مهرجان","عرض","محل","مقهى","مطعم","سوق","مخبز",
+"محل","مجوهرات","محل","أحذية","محل","ملابس","مكتبة","مختبر","عيادة","صيدلية",
+"مركز","مستشفى","طبيب","ممرض","قابلة","جراح","أخصائي","ممرضة","صيدلي","طبيب",
+"موسيقي","عازف","مطرب","مغنية","فرقة","عازف","بيانو","غيتار","كمان","طبلة",
+"إيقاع","لحن","نغمة","كورس","مقطع","مسرح","مسرحية","مشهد","حوار","نص",
+"قلم","ممحاة","دفتر","مذكرة","قائمة","خطة","تقويم","منبه","ساعة","تقويم",
+"نافذة","باب","جدار","سقف","أرضية","سلم","مصعد","ممر","درج","مخرج",
+"رصيف","رصيف","رصيف","رصيف","رصيف","رصيف"
+];
 
-    <footer class="footer">
-      <small>اللعبة: كود نيمز REDSWORD — نسخة مطورة مع دعم الصوت</small>
-    </footer>
-  </div>
+        // متغيرات اللعبة
+        let gameWords = [];
+        let wordColors = []; // 0: أحمر, 1: أزرق, 2: أصفر, 3: أسود
+        let revealedCards = [];
+        let currentTeam = 'red'; // 'red' أو 'blue'
+        let gameActive = false;
+        let redWordsRemaining = 8;
+        let blueWordsRemaining = 8;
 
-  <script type="module" src="script.js"></script>
+        // عناصر DOM
+        const wordsGrid = document.getElementById('words-grid');
+        const newGameBtn = document.getElementById('new-game-btn');
+        const copyPlayersBtn = document.getElementById('copy-players-btn');
+        const copySpymasterBtn = document.getElementById('copy-spymaster-btn');
+        const resetGameBtn = document.getElementById('reset-game-btn');
+        const teamRedOption = document.getElementById('team-red-option');
+        const teamBlueOption = document.getElementById('team-blue-option');
+        const redCount = document.getElementById('red-count');
+        const blueCount = document.getElementById('blue-count');
+        const currentTurn = document.getElementById('current-turn');
+        const remainingWords = document.getElementById('remaining-words');
+        const gameAlert = document.getElementById('game-alert');
+        const copyAlert = document.getElementById('copy-alert');
+
+        // تهيئة اللعبة
+        function initGame() {
+            // إنشاء مجموعة عشوائية من 24 كلمة
+            gameWords = getRandomWords(24);
+            
+            // تعيين الألوان عشوائياً
+            assignRandomColors();
+            
+            // إعادة تعيين الحالة
+            revealedCards = Array(24).fill(false);
+            currentTeam = 'red';
+            redWordsRemaining = 8;
+            blueWordsRemaining = 8;
+            gameActive = true;
+            
+            // تحديث الواجهة
+            updateGameBoard();
+            updateGameStatus();
+            
+            // تحديث التنبيه
+            gameAlert.className = "alert alert-success";
+            gameAlert.innerHTML = '<i class="fas fa-play-circle"></i><span>بدأت لعبة جديدة! الدور الآن للفريق الأحمر.</span>';
+            
+            // تحديث اختيار الفريق
+            teamRedOption.classList.add('selected');
+            teamBlueOption.classList.remove('selected');
+        }
+
+        // الحصول على كلمات عشوائية من قاعدة البيانات
+        function getRandomWords(count) {
+            const shuffled = [...wordsDatabase].sort(() => 0.5 - Math.random());
+            return shuffled.slice(0, count);
+        }
+
+        // تعيين الألوان عشوائياً للكلمات
+        function assignRandomColors() {
+            // 8 أحمر، 8 أزرق، 7 أصفر، 1 أسود
+            wordColors = [
+                ...Array(8).fill(0),  // أحمر
+                ...Array(8).fill(1),  // أزرق
+                ...Array(7).fill(2),  // أصفر
+                ...Array(1).fill(3)   // أسود
+            ];
+            
+            // خلط الألوان عشوائياً
+            for (let i = wordColors.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [wordColors[i], wordColors[j]] = [wordColors[j], wordColors[i]];
+            }
+        }
+
+        // دالة لتحديد كيفية عرض الكلمة
+        function formatWordDisplay(word) {
+            // التحقق إذا كانت الكلمة تحتوي على مسافات (كلمات متعددة)
+            if (/\s/.test(word)) {
+                // تقسيم الكلمات وإضافتها في spans منفصلة
+                const words = word.split(/\s+/);
+                let displayHTML = '';
+                
+                // إضافة كل كلمة في سطر منفصل
+                words.forEach((w, index) => {
+                    if (index > 0) displayHTML += '<br>';
+                    displayHTML += `<span>${w}</span>`;
+                });
+                
+                return {
+                    displayText: displayHTML,
+                    cssClass: 'multi-word'
+                };
+            }
+            
+            // إذا كانت كلمة مفردة
+            // تقليل حجم الخط بناءً على طول الكلمة
+            if (word.length > 12) {
+                return {
+                    displayText: word,
+                    cssClass: 'very-long-word'
+                };
+            } else if (word.length > 8) {
+                return {
+                    displayText: word,
+                    cssClass: 'long-word'
+                };
+            } else {
+                return {
+                    displayText: word,
+                    cssClass: ''
+                };
+            }
+        }
+
+        // تحديث لوحة الكلمات
+        function updateGameBoard() {
+            wordsGrid.innerHTML = '';
+            
+            gameWords.forEach((word, index) => {
+                const card = document.createElement('div');
+                card.className = 'word-card';
+                
+                // تنسيق عرض الكلمة
+                const {displayText, cssClass} = formatWordDisplay(word);
+                card.innerHTML = displayText;
+                card.title = word;
+                
+                // إضافة الفئة المناسبة لعرض النص
+                if (cssClass) {
+                    card.classList.add(cssClass);
+                }
+                
+                // إضافة لون الكلمة
+                if (revealedCards[index]) {
+                    card.classList.add('revealed');
+                }
+                
+                switch(wordColors[index]) {
+                    case 0: // أحمر
+                        card.classList.add('red');
+                        break;
+                    case 1: // أزرق
+                        card.classList.add('blue');
+                        break;
+                    case 2: // أصفر
+                        card.classList.add('yellow');
+                        break;
+                    case 3: // أسود
+                        card.classList.add('black');
+                        break;
+                }
+                
+                card.dataset.index = index;
+                card.addEventListener('click', () => handleCardClick(index));
+                
+                wordsGrid.appendChild(card);
+            });
+        }
+
+        // تحديث حالة اللعبة
+        function updateGameStatus() {
+            // حساب الكلمات المتبقية
+            redWordsRemaining = 0;
+            blueWordsRemaining = 0;
+            let totalRemaining = 0;
+            
+            for (let i = 0; i < 24; i++) {
+                if (!revealedCards[i]) {
+                    totalRemaining++;
+                    
+                    if (wordColors[i] === 0) redWordsRemaining++;
+                    if (wordColors[i] === 1) blueWordsRemaining++;
+                }
+            }
+            
+            // تحديث العدادات
+            redCount.textContent = redWordsRemaining;
+            blueCount.textContent = blueWordsRemaining;
+            remainingWords.textContent = totalRemaining;
+            
+            // تحديث الدور الحالي
+            currentTurn.textContent = currentTeam === 'red' ? '🔴' : '🔵';
+            currentTurn.className = currentTeam === 'red' ? 'status-value red' : 'status-value blue';
+            
+            // التحقق من فوز فريق
+            checkWinCondition();
+        }
+
+        // التعامل مع النقر على بطاقة
+        function handleCardClick(index) {
+            if (!gameActive || revealedCards[index]) return;
+            
+            revealedCards[index] = true;
+            const color = wordColors[index];
+            
+            // تحديث اللوحة
+            updateGameBoard();
+            
+            // التحقق من النتيجة
+            if (color === 3) { // كلمة سوداء (قاتلة)
+                gameActive = false;
+                const winner = currentTeam === 'red' ? 'الأزرق' : 'الأحمر';
+                gameAlert.className = "alert alert-danger";
+                gameAlert.innerHTML = `<i class="fas fa-skull-crossbones"></i><span>الكلمة القاتلة! الفريق ${winner} يفوز!</span>`;
+                highlightWinningTeam(winner);
+            } 
+            else if ((color === 0 && currentTeam === 'blue') || (color === 1 && currentTeam === 'red')) {
+                // اختيار خاطئ - تغيير الدور
+                currentTeam = currentTeam === 'red' ? 'blue' : 'red';
+                gameAlert.className = "alert alert-warning";
+                gameAlert.innerHTML = `<i class="fas fa-exchange-alt"></i><span>اختيار خاطئ! الدور الآن للفريق ${currentTeam === 'red' ? 'الأحمر' : 'الأزرق'}.</span>`;
+                
+                // تحديث اختيار الفريق
+                updateTeamSelection();
+            } 
+            else if ((color === 0 && currentTeam === 'red') || (color === 1 && currentTeam === 'blue')) {
+                // اختيار صحيح
+                gameAlert.className = "alert alert-success";
+                gameAlert.innerHTML = `<i class="fas fa-check-circle"></i><span>اختيار صحيح! استمر الفريق ${currentTeam === 'red' ? 'الأحمر' : 'الأزرق'}.</span>`;
+            }
+            else if (color === 2) { // كلمة محايدة
+                currentTeam = currentTeam === 'red' ? 'blue' : 'red';
+                gameAlert.className = "alert alert-warning";
+                gameAlert.innerHTML = `<i class="fas fa-exchange-alt"></i><span>كلمة محايدة! الدور الآن للفريق ${currentTeam === 'red' ? 'الأحمر' : 'الأزرق'}.</span>`;
+                
+                // تحديث اختيار الفريق
+                updateTeamSelection();
+            }
+            
+            // تحديث حالة اللعبة
+            updateGameStatus();
+        }
+
+        // التحقق من شرط الفوز
+        function checkWinCondition() {
+            if (!gameActive) return;
+            
+            if (redWordsRemaining === 0) {
+                gameActive = false;
+                gameAlert.className = "alert alert-success";
+                gameAlert.innerHTML = '<i class="fas fa-trophy"></i><span>الفريق الأحمر يفوز! لقد وجد جميع كلماته.</span>';
+                highlightWinningTeam('red');
+            } 
+            else if (blueWordsRemaining === 0) {
+                gameActive = false;
+                gameAlert.className = "alert alert-success";
+                gameAlert.innerHTML = '<i class="fas fa-trophy"></i><span>الفريق الأزرق يفوز! لقد وجد جميع كلماته.</span>';
+                highlightWinningTeam('blue');
+            }
+        }
+
+        // تسليط الضوء على الفريق الفائز
+        function highlightWinningTeam(winner) {
+            const cards = document.querySelectorAll('.word-card');
+            cards.forEach(card => {
+                if (winner === 'red' && card.classList.contains('red')) {
+                    card.classList.add('win-animation');
+                } 
+                else if (winner === 'blue' && card.classList.contains('blue')) {
+                    card.classList.add('win-animation');
+                }
+            });
+        }
+
+        // تحديث اختيار الفريق
+        function updateTeamSelection() {
+            if (currentTeam === 'red') {
+                teamRedOption.classList.add('selected');
+                teamBlueOption.classList.remove('selected');
+            } else {
+                teamRedOption.classList.remove('selected');
+                teamBlueOption.classList.add('selected');
+            }
+        }
+
+        // نسخ خريطة اللاعبين
+        function copyPlayersMap() {
+            let text = `ألعاب -𖤍|𝐑𝐄𝐃𝐒𝐖𝐎𝐑𝐃
+لعبة كود نيمز
+-----------------------
+خريطة الكلمات للاعبيين (العملاء)
+`;
+            
+            gameWords.forEach((word, index) => {
+                text += `${index + 1}) ${word}  \n`;
+            });
+            
+            text += `------------------
+.،`;
+            
+            copyToClipboard(text);
+            showCopyAlert();
+        }
+
+        // نسخ خريطة الجواسيس
+        function copySpymasterMap() {
+            let text = `ألعاب -𖤍|𝐑𝐄𝐃𝐒𝐖𝐎𝐑𝐃
+لعبة كود نيمز
+-----------------------
+خريطة الكلمات للجواسيس (الشارح)
+`;
+            
+            // تنظيم الكلمات في أزواج
+            for (let i = 0; i < 24; i += 2) {
+                const word1 = gameWords[i];
+                const word2 = gameWords[i + 1] || "";
+                
+                // الحصول على الرموز المناسبة
+                const emoji1 = getColorEmoji(wordColors[i]);
+                const emoji2 = getColorEmoji(wordColors[i + 1]);
+                
+                text += `(${word1} ${emoji1} | ${word2} ${emoji2})\n`;
+            }
+            
+            text += `------------------
+.،`;
+            
+            copyToClipboard(text);
+            showCopyAlert();
+        }
+
+        // الحصول على إيموجي اللون
+        function getColorEmoji(colorIndex) {
+            switch(colorIndex) {
+                case 0: return "🟥";
+                case 1: return "🟦";
+                case 2: return "🟨";
+                case 3: return "⬛";
+                default: return "";
+            }
+        }
+
+        // نسخ النص إلى الحافظة
+        function copyToClipboard(text) {
+            const textarea = document.createElement('textarea');
+            textarea.value = text;
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textarea);
+        }
+
+        // عرض تنبيه النسخ
+        function showCopyAlert() {
+            copyAlert.style.display = 'flex';
+            setTimeout(() => {
+                copyAlert.style.display = 'none';
+            }, 3000);
+        }
+
+        // إعادة تعيين اللعبة
+        function resetGame() {
+            revealedCards = Array(24).fill(false);
+            currentTeam = 'red';
+            gameActive = true;
+            updateGameBoard();
+            updateGameStatus();
+            updateTeamSelection();
+            
+            gameAlert.className = "alert alert-success";
+            gameAlert.innerHTML = '<i class="fas fa-redo"></i><span>تم إعادة تعيين اللعبة! الدور الآن للفريق الأحمر.</span>';
+        }
+
+        // تعيين مستمعي الأحداث
+        newGameBtn.addEventListener('click', initGame);
+        copyPlayersBtn.addEventListener('click', copyPlayersMap);
+        copySpymasterBtn.addEventListener('click', copySpymasterMap);
+        resetGameBtn.addEventListener('click', resetGame);
+
+        // تغيير الفريق صاحب الدور
+        teamRedOption.addEventListener('click', () => {
+            if (!gameActive) return;
+            currentTeam = 'red';
+            updateTeamSelection();
+            updateGameStatus();
+            
+            gameAlert.className = "alert alert-info";
+            gameAlert.innerHTML = '<i class="fas fa-info-circle"></i><span>تم تغيير الدور إلى الفريق الأحمر.</span>';
+        });
+
+        teamBlueOption.addEventListener('click', () => {
+            if (!gameActive) return;
+            currentTeam = 'blue';
+            updateTeamSelection();
+            updateGameStatus();
+            
+            gameAlert.className = "alert alert-info";
+            gameAlert.innerHTML = '<i class="fas fa-info-circle"></i><span>تم تغيير الدور إلى الفريق الأزرق.</span>';
+        });
+
+        // بدء لعبة أولية عند تحميل الصفحة
+        window.addEventListener('DOMContentLoaded', () => {
+            // عرض رسالة ترحيب
+            gameAlert.className = "alert alert-info";
+            gameAlert.innerHTML = '<i class="fas fa-info-circle"></i><span>مرحباً بالمضيف! انقر على "بدء لعبة جديدة" لبدء الجولة الأولى.</span>';
+            
+            // إنشاء لعبة أولية
+            initGame();
+        });
+    </script>
 </body>
-</html></html>
+</html>
