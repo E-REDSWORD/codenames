@@ -572,6 +572,52 @@
                 font-size: 1rem;
             }
         }
+        
+        /* أزرار النسخ للفريقين - جديدة */
+        .team-copy-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .team-copy-btn {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            min-width: 200px;
+        }
+        
+        .team-red-btn {
+            background-color: #c53030;
+            color: white;
+        }
+        
+        .team-red-btn:hover {
+            background-color: #b91c1c;
+            transform: translateY(-2px);
+            box-shadow: 0 3px 10px rgba(197, 48, 48, 0.3);
+        }
+        
+        .team-blue-btn {
+            background-color: #2b6cb0;
+            color: white;
+        }
+        
+        .team-blue-btn:hover {
+            background-color: #2c5282;
+            transform: translateY(-2px);
+            box-shadow: 0 3px 10px rgba(43, 108, 176, 0.3);
+        }
     </style>
 </head>
 <body>
@@ -655,6 +701,16 @@
                 <i class="fas fa-info-circle"></i>
                 <span>انقر على "بدء لعبة جديدة" لبدء الجولة الأولى!</span>
             </div>
+        </div>
+        
+        <!-- أزرار النسخ للفريقين - المضافة -->
+        <div class="team-copy-buttons">
+            <button class="team-copy-btn team-red-btn" id="copy-red-team-btn">
+                <i class="fas fa-copy"></i> نسخ كلمات جواسيس الفريق الأحمر 🟥
+            </button>
+            <button class="team-copy-btn team-blue-btn" id="copy-blue-team-btn">
+                <i class="fas fa-copy"></i> نسخ كلمات جواسيس الفريق الأزرق 🟦
+            </button>
         </div>
         
         <footer>
@@ -757,6 +813,8 @@
         const remainingWords = document.getElementById('remaining-words');
         const gameAlert = document.getElementById('game-alert');
         const copyAlert = document.getElementById('copy-alert');
+        const copyRedTeamBtn = document.getElementById('copy-red-team-btn');
+        const copyBlueTeamBtn = document.getElementById('copy-blue-team-btn');
 
         // تهيئة اللعبة
         function initGame() {
@@ -1056,6 +1114,56 @@
             showCopyAlert();
         }
 
+        // نسخ كلمات فريق الأحمر فقط
+        function copyRedTeamWords() {
+            let text = `ألعاب -𖤍|𝐑𝐄𝐃𝐒𝐖𝐎𝐑𝐃
+لعبة كود نيمز
+-----------------------
+كلمات جواسيس الفريق الأحمر فقط 🟥🟥🟥🟥🟥🟥🟥🟥
+`;
+            
+            let redWordCount = 0;
+            gameWords.forEach((word, index) => {
+                if (wordColors[index] === 0) { // أحمر فقط
+                    redWordCount++;
+                    const emoji = getColorEmoji(wordColors[index]);
+                    text += `${redWordCount}) ${word} ${emoji}\n`;
+                }
+            });
+            
+            text += `------------------
+إجمالي: ${redWordCount} كلمة
+.،`;
+            
+            copyToClipboard(text);
+            showCopyAlert();
+        }
+
+        // نسخ كلمات فريق الأزرق فقط
+        function copyBlueTeamWords() {
+            let text = `ألعاب -𖤍|𝐑𝐄𝐃𝐒𝐖𝐎𝐑𝐃
+لعبة كود نيمز
+-----------------------
+كلمات جواسيس الفريق الأزرق فقط 🟦🟦🟦🟦🟦🟦🟦🟦
+`;
+            
+            let blueWordCount = 0;
+            gameWords.forEach((word, index) => {
+                if (wordColors[index] === 1) { // أزرق فقط
+                    blueWordCount++;
+                    const emoji = getColorEmoji(wordColors[index]);
+                    text += `${blueWordCount}) ${word} ${emoji}\n`;
+                }
+            });
+            
+            text += `------------------
+إجمالي: ${blueWordCount} كلمة
+.،`;
+            
+            copyToClipboard(text);
+            showCopyAlert();
+        }
+
         // الحصول على إيموجي اللون
         function getColorEmoji(colorIndex) {
             switch(colorIndex) {
@@ -1102,6 +1210,8 @@
         newGameBtn.addEventListener('click', initGame);
         copyPlayersBtn.addEventListener('click', copyPlayersMap);
         copySpymasterBtn.addEventListener('click', copySpymasterMap);
+        copyRedTeamBtn.addEventListener('click', copyRedTeamWords);
+        copyBlueTeamBtn.addEventListener('click', copyBlueTeamWords);
         resetGameBtn.addEventListener('click', resetGame);
 
         // تغيير الفريق صاحب الدور
