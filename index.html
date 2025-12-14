@@ -1087,25 +1087,74 @@
             showCopyAlert();
         }
 
-        // نسخ خريطة الجواسيس
+        // نسخ خريطة الجواسيس بالترتيب الجديد
         function copySpymasterMap() {
+            // جمع الكلمات حسب أنواعها
+            const redWords = [];
+            const blueWords = [];
+            const yellowWords = [];
+            const blackWords = [];
+            
+            // تجميع الكلمات حسب اللون
+            gameWords.forEach((word, index) => {
+                const color = wordColors[index];
+                const emoji = getColorEmoji(color);
+                
+                switch(color) {
+                    case 0: // أحمر
+                        redWords.push({word, emoji});
+                        break;
+                    case 1: // أزرق
+                        blueWords.push({word, emoji});
+                        break;
+                    case 2: // أصفر
+                        yellowWords.push({word, emoji});
+                        break;
+                    case 3: // أسود
+                        blackWords.push({word, emoji});
+                        break;
+                }
+            });
+            
             let text = `ألعاب -𖤍|𝐑𝐄𝐃𝐒𝐖𝐎𝐑𝐃
 لعبة كود نيمز
 -----------------------
 خريطة الكلمات للجواسيس (الشارح)
 `;
             
-            // تنظيم الكلمات في أزواج
-            for (let i = 0; i < 24; i += 2) {
-                const word1 = gameWords[i];
-                const word2 = gameWords[i + 1] || "";
+            // عرض كلمات الفريق الأحمر مع الفريق الأزرق جنباً إلى جنب
+            // كل سطر يحتوي على كلمة حمراء وكلمة زرقاء
+            const maxPairs = Math.max(redWords.length, blueWords.length);
+            
+            for (let i = 0; i < maxPairs; i++) {
+                const redWord = redWords[i] ? `${redWords[i].word} ${redWords[i].emoji}` : "";
+                const blueWord = blueWords[i] ? `${blueWords[i].word} ${blueWords[i].emoji}` : "";
                 
-                // الحصول على الرموز المناسبة
-                const emoji1 = getColorEmoji(wordColors[i]);
-                const emoji2 = getColorEmoji(wordColors[i + 1]);
-                
-                text += `(${word1} ${emoji1} | ${word2} ${emoji2})\n`;
+                if (redWord && blueWord) {
+                    text += `(${redWord} | ${blueWord})\n`;
+                } else if (redWord) {
+                    text += `(${redWord})\n`;
+                } else if (blueWord) {
+                    text += `(${blueWord})\n`;
+                }
             }
+            
+            // عرض الكلمات الصفراء (المحايدة) - كل سطر يحتوي على كلمتين
+            for (let i = 0; i < yellowWords.length; i += 2) {
+                const yellowWord1 = yellowWords[i] ? `${yellowWords[i].word} ${yellowWords[i].emoji}` : "";
+                const yellowWord2 = yellowWords[i + 1] ? `${yellowWords[i + 1].word} ${yellowWords[i + 1].emoji}` : "";
+                
+                if (yellowWord1 && yellowWord2) {
+                    text += `(${yellowWord1} | ${yellowWord2})\n`;
+                } else if (yellowWord1) {
+                    text += `(${yellowWord1})\n`;
+                }
+            }
+            
+            // عرض الكلمات السوداء (القاتلة)
+            blackWords.forEach(blackWord => {
+                text += `(${blackWord.word} ${blackWord.emoji})\n`;
+            });
             
             text += `------------------
 .،`;
@@ -1167,10 +1216,10 @@
         // الحصول على إيموجي اللون
         function getColorEmoji(colorIndex) {
             switch(colorIndex) {
-                case 0: return "🟥";
-                case 1: return "🟦";
-                case 2: return "🟨";
-                case 3: return "⬛";
+                case 0: return "🔴";
+                case 1: return "🔵";
+                case 2: return "🟡";
+                case 3: return "⚫";
                 default: return "";
             }
         }
