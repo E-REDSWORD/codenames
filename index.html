@@ -720,78 +720,812 @@
     </div>
 
     <script>
-        // قاعدة بيانات الكلمات (باستخدام الكلمات المرفوعة)
-        const wordsDatabase = [
-"صحراء","مدينة","قرية","منزل","شارع","سيارة","طائرة","قطار","دراجة","كتاب",
-"قصة","رواية","شعر","أدب","فن","موسيقى","رسم","صورة","لون","فرشاة",
-"كاميرا","فيلم","مسرح","رقص","غناء","طعام","شراب","فاكهة","خضار","لحم",
-"سمك","خبز","جبن","قهوة","شاي","عصير","حليب","سكر","ملح","فلفل",
-"زيت","رياضة","كرة","ملعب","فريق","مباراة","هدف","جائزة","تحدي","عائلة",
-"أب","أم","أخ","أخت","جد","جدة","طفل","مدرسة","جامعة","طالب",
-"معلم","دفتر","قلم","ممحاة","عمل","وظيفة","مكتب","شركة","رئيس","موظف",
-"راتب","إجازة","صحة","مرض","دواء","مستشفى","طبيب","ممرض","جراحة","علاج",
-"سفر","رحلة","فندق","مطار","جواز","تذكرة","حقيبة","زمن","وقت","تاريخ",
-"مستقبل","حاضر","ماضي","عام","شهر","أسبوع","يوم","ساعة","دقيقة","ثانية",
-"صباح","مساء","صيف","شتاء","ربيع","خريف","حار","بارد","دافئ","طويل",
-"قصير","كبير","صغير","سمين","نحيف","قوي","ضعيف","سعيد","حزين","فرح",
-"غضب","خوف","أمل","حب","كراهية","صداقة","عداوة","ثقة","شك","نجاح",
-"فشل","حظ","قدر","علم","معرفة","تفكير","ذاكرة","فهم","جهل","سؤال",
-"جواب","قرار","خطة","هدف","حلم","واقع","خيال","ابتكار","اكتشاف","سرعة",
-"بطء","سهولة","صعوبة","بساطة","تعقيد","بداية","نهاية","موسم","مهرجان","احتفال",
-"عيد","هدية","مفاجأة","سر","خطر","شجاعة","حكمة","جنون","صمت","وعد",
-"قانون","آثار","معبد","مسجد","كنيسة","سوق","مرفأ","مقبرة","قلعة","مكتبة",
-"مستودع","مزرعة","مرصد","سينما","حديقة","متنزه","مركز","مصنع","ورشة","متجر",
-"بازار","زقاق","ساحة","جسر","نهر","واحة","جبل","تل","سهل","وادي",
-"غابة","شجرة","زهرة","ورد","نخلة","صبار","لوتس","أرز","نبات","عشب",
-"جذع","ورق","بذرة","ثمرة","جذور","طين","رمل","حجر","صخرة","كهف",
-"شاطئ","بحر","محيط","موج","شمس","قمر","نجمة","سماء","سحابة","مطر",
-"ثلج","برق","رعد","ضباب","زوبعة","بركان","هزة","مد","جزر","توازن",
-"استثمار","ويب","الروليت","فاتورة","منشفة","فطيرة","مقلاة","مصباح","مفتاح","مرآة",
-"مطرقة","محراث","مسطرة","محفظة","منديل","مرجل","مصعد","مروحة","مغناطيس","محبرة",
-"نجار","حداد","خياط","صيدلي","محام","قاض","مترجم","مزارع","بحار","طيار",
-"مصمم","مبرمج","مصور","مغن","مهندس","سائق","نادل","ممرض","قطة","كللب",
-"حصان","نمر","غزال","ببغاء","سنجاب","قنفذ","تمساح","دلفين","حوت","سلحفاة",
-"عقرب","ثعلب","ذئب","نخيل","سرو","لبلاب","أقحوان","بندق","زيتون","ليمون",
-"تفاح","برتقال","موز","عنب","رمان","خوخ","مشمش","فراولة","كيوي","أناناس",
-"جوز","لوز","عدس","حمص","فول","رز","معكرونة","بيتزا","برغر","سوشي",
-"شاورما","فلافل","كسكسي","بسبوسة","كنافة","مربى","عسل","لبنة","مخلل","بطاطس",
-"سلطة","حساء","مقبلات","حلويات","آيسكريم","ماء","ثلاجة","فرن","موقد","مغسلة",
-"صحن","شوكة","سكين","ملعقة","كوب","زجاجة","علبة","صندوق","رف","خزانة",
-"سرير","كرسي","طاولة","أريكة","وسادة","بطانية","مكتب","حاسوب","لابتوب","هاتف",
-"سماعة","طابعة","راوتر","شبكة","موقع","تطبيق","بريد","خادم","برمجة","خوارزمية",
-"ذكاء","روبوت","سياسة","حكومة","انتخابات","دستور","برلمان","وزير","رئيس","دبلوماسية",
-"سفارة","اقتصاد","سوق","سهم","بنك","عملة","ميزانية","ضرائب","تجارة","مشروع",
-"شركة","عقد","اتفاق","توظيف","تدريب","مهارة","خبرة","سيرة","مقابلة","ترقية",
-"تقاعد","معاش","إعلام","صحافة","مقال","خبر","مذيع","قناة","راديو","تلفاز",
-"مدونة","بودكاست","مسرحية","عرض","معرض","متحف","مؤتمر","ندوة","ورشة","بحث",
-"مختبر","عينة","بيانات","إحصاء","نظرية","فرضية","نتيجة","استنتاج","فيزياء","كيمياء",
-"أحياء","رياضيات","هندسة","طب","زراعة","بيئة","مناخ","تلوث","تدوير","طاقة",
-"مياه","ري","سد","فيض","جفاف","زلزال","إعصار","كارثة","إغاثة","تطوع",
-"منظمة","جمعية","تبرع","حملة","احتجاج","مسيرة","حقوق","عدالة","مساواة","حرية",
-"ديمقراطية","تسامح","تعايش","ثقافة","تراث","لغة","لهجة","أمثال","أغنية","رقصة",
-"زي","مطبخ","عادات","تقاليد","زواج","ولادة","جنازة","ذكرى","علم","نشيد",
-"حدود","هجرة","لاجئ","مهاجر","جنسية","هوية","عنوان","خريطة","بوصلة","اتجاه",
-"مسافة","سرعة","وقود","محرك","بطارية","شاحن","كهرباء","مقبس","أسلاك","مفك",
-"مسمار","برغي","قفل","حافلة","شاحنة","مترو","ترام","قارب","يخت","منارة",
-"مخيم","خيمة","نار","شواء","تخييم","دليل","مرشد","خدمة","شكاوى","مراجعات",
-"تقييم","مؤشر","مقياس","كاميرا","إنذار","حريق","طفاية","إسعاف","شرطة","محطة",
-"جراج","موقف","رخصة","إشارة","ممر","مخرج","مدخل","نفق","طريق","دائري",
-"ميدان","تمثال","نصب","أرشيف","وثيقة","مخطوطة","صك","شهادة","دبلوم","ماجستير",
-"دكتوراه","مقال","مرجع","فهرس","مؤلف","ناشر","محرر","مترجم","حلقة","موسم",
-"مخرج","ممثل","ممثلة","كوميديا","دراما","رعب","خيال","أنمي","كوميك","ملصق",
-"إعلان","شعار","تصميم","خط","طباعة","ورق","حبر","مغلف","طابع","تذكار",
-"هدية","ميدالية","شهادة","مهرجان","عرض","محل","مقهى","مطعم","سوق","مخبز",
-"محل","مجوهرات","محل","أحذية","محل","ملابس","مكتبة","مختبر","عيادة","صيدلية",
-"مركز","مستشفى","طبيب","ممرض","قابلة","جراح","أخصائي","ممرضة","صيدلي","طبيب",
-"موسيقي","عازف","مطرب","مغنية","فرقة","عازف","بيانو","غيتار","كمان","طبلة",
-"إيقاع","لحن","نغمة","كورس","مقطع","مسرح","مسرحية","مشهد","حوار","نص",
-"قلم","ممحاة","دفتر","مذكرة","قائمة","خطة","تقويم","منبه","ساعة","تقويم",
-"نافذة","باب","جدار","سقف","أرضية","سلم","مصعد","ممر","درج","مخرج",
-"هتلر","الفاتيكان","كاشير","مخابرات","رصيف","مداهمة"
+// قاعدة بيانات الكلمات مع الفئات (categories)
+const wordsDatabase = [
+    // ========== الطبيعة (nature) ==========
+    { word: "صحراء", category: "nature" },
+    { word: "جبل", category: "nature" },
+    { word: "تل", category: "nature" },
+    { word: "سهل", category: "nature" },
+    { word: "وادي", category: "nature" },
+    { word: "غابة", category: "nature" },
+    { word: "شجرة", category: "nature" },
+    { word: "زهرة", category: "nature" },
+    { word: "ورد", category: "nature" },
+    { word: "نخلة", category: "nature" },
+    { word: "صبار", category: "nature" },
+    { word: "لوتس", category: "nature" },
+    { word: "أرز", category: "nature" },
+    { word: "نبات", category: "nature" },
+    { word: "عشب", category: "nature" },
+    { word: "جذع", category: "nature" },
+    { word: "ورق", category: "nature" },
+    { word: "بذرة", category: "nature" },
+    { word: "ثمرة", category: "nature" },
+    { word: "جذور", category: "nature" },
+    { word: "طين", category: "nature" },
+    { word: "رمل", category: "nature" },
+    { word: "حجر", category: "nature" },
+    { word: "صخرة", category: "nature" },
+    { word: "كهف", category: "nature" },
+    { word: "شاطئ", category: "nature" },
+    { word: "بحر", category: "nature" },
+    { word: "محيط", category: "nature" },
+    { word: "موج", category: "nature" },
+    { word: "شمس", category: "nature" },
+    { word: "قمر", category: "nature" },
+    { word: "نجمة", category: "nature" },
+    { word: "سماء", category: "nature" },
+    { word: "سحابة", category: "nature" },
+    { word: "مطر", category: "nature" },
+    { word: "ثلج", category: "nature" },
+    { word: "برق", category: "nature" },
+    { word: "رعد", category: "nature" },
+    { word: "ضباب", category: "nature" },
+    { word: "زوبعة", category: "nature" },
+    { word: "بركان", category: "nature" },
+    { word: "هزة", category: "nature" },
+    { word: "مد", category: "nature" },
+    { word: "جزر", category: "nature" },
+    { word: "نهر", category: "nature" },
+    { word: "واحة", category: "nature" },
+    
+    // ========== الأماكن (places) ==========
+    { word: "مدينة", category: "places" },
+    { word: "قرية", category: "places" },
+    { word: "منزل", category: "places" },
+    { word: "شارع", category: "places" },
+    { word: "مدرسة", category: "places" },
+    { word: "جامعة", category: "places" },
+    { word: "مكتب", category: "places" },
+    { word: "شركة", category: "places" },
+    { word: "مستشفى", category: "places" },
+    { word: "مطار", category: "places" },
+    { word: "فندق", category: "places" },
+    { word: "معبد", category: "places" },
+    { word: "مسجد", category: "places" },
+    { word: "كنيسة", category: "places" },
+    { word: "سوق", category: "places" },
+    { word: "مرفأ", category: "places" },
+    { word: "مقبرة", category: "places" },
+    { word: "قلعة", category: "places" },
+    { word: "مكتبة", category: "places" },
+    { word: "مستودع", category: "places" },
+    { word: "مزرعة", category: "places" },
+    { word: "مرصد", category: "places" },
+    { word: "سينما", category: "places" },
+    { word: "حديقة", category: "places" },
+    { word: "متنزه", category: "places" },
+    { word: "مركز", category: "places" },
+    { word: "مصنع", category: "places" },
+    { word: "ورشة", category: "places" },
+    { word: "متجر", category: "places" },
+    { word: "بازار", category: "places" },
+    { word: "زقاق", category: "places" },
+    { word: "ساحة", category: "places" },
+    { word: "جسر", category: "places" },
+    { word: "محطة", category: "places" },
+    { word: "جراج", category: "places" },
+    { word: "موقف", category: "places" },
+    { word: "نفق", category: "places" },
+    { word: "طريق", category: "places" },
+    { word: "دائري", category: "places" },
+    { word: "ميدان", category: "places" },
+    { word: "تمثال", category: "places" },
+    { word: "نصب", category: "places" },
+    { word: "مقهى", category: "places" },
+    { word: "مطعم", category: "places" },
+    { word: "مخبز", category: "places" },
+    { word: "عيادة", category: "places" },
+    { word: "صيدلية", category: "places" },
+    
+    // ========== المواصلات (transport) ==========
+    { word: "سيارة", category: "transport" },
+    { word: "طائرة", category: "transport" },
+    { word: "قطار", category: "transport" },
+    { word: "دراجة", category: "transport" },
+    { word: "حافلة", category: "transport" },
+    { word: "شاحنة", category: "transport" },
+    { word: "مترو", category: "transport" },
+    { word: "ترام", category: "transport" },
+    { word: "قارب", category: "transport" },
+    { word: "يخت", category: "transport" },
+    { word: "منارة", category: "transport" },
+    { word: "باخرة", category: "transport" },
+    { word: "عربة", category: "transport" },
+    { word: "ميكروباص", category: "transport" },
+    { word: "باص", category: "transport" },
+    { word: "مرسيدس", category: "transport" },
+    { word: "تويوتا", category: "transport" },
+    { word: "كيا", category: "transport" },
+    { word: "هيونداي", category: "transport" },
+    { word: "فيراري", category: "transport" },
+    { word: "لامبورجيني", category: "transport" },
+    { word: "رولز رويس", category: "transport" },
+    { word: "تسلا", category: "transport" },
+    { word: "شيفروليه", category: "transport" },
+    { word: "فورد", category: "transport" },
+    
+    // ========== الطعام (food) ==========
+    { word: "طعام", category: "food" },
+    { word: "شراب", category: "food" },
+    { word: "فاكهة", category: "food" },
+    { word: "خضار", category: "food" },
+    { word: "لحم", category: "food" },
+    { word: "سمك", category: "food" },
+    { word: "خبز", category: "food" },
+    { word: "جبن", category: "food" },
+    { word: "قهوة", category: "food" },
+    { word: "شاي", category: "food" },
+    { word: "عصير", category: "food" },
+    { word: "حليب", category: "food" },
+    { word: "سكر", category: "food" },
+    { word: "ملح", category: "food" },
+    { word: "فلفل", category: "food" },
+    { word: "زيت", category: "food" },
+    { word: "تفاح", category: "food" },
+    { word: "برتقال", category: "food" },
+    { word: "موز", category: "food" },
+    { word: "عنب", category: "food" },
+    { word: "رمان", category: "food" },
+    { word: "خوخ", category: "food" },
+    { word: "مشمش", category: "food" },
+    { word: "فراولة", category: "food" },
+    { word: "كيوي", category: "food" },
+    { word: "أناناس", category: "food" },
+    { word: "جوز", category: "food" },
+    { word: "لوز", category: "food" },
+    { word: "عدس", category: "food" },
+    { word: "حمص", category: "food" },
+    { word: "فول", category: "food" },
+    { word: "رز", category: "food" },
+    { word: "معكرونة", category: "food" },
+    { word: "بيتزا", category: "food" },
+    { word: "برغر", category: "food" },
+    { word: "سوشي", category: "food" },
+    { word: "شاورما", category: "food" },
+    { word: "فلافل", category: "food" },
+    { word: "كسكسي", category: "food" },
+    { word: "بسبوسة", category: "food" },
+    { word: "كنافة", category: "food" },
+    { word: "مربى", category: "food" },
+    { word: "عسل", category: "food" },
+    { word: "لبنة", category: "food" },
+    { word: "مخلل", category: "food" },
+    { word: "بطاطس", category: "food" },
+    { word: "سلطة", category: "food" },
+    { word: "حساء", category: "food" },
+    { word: "مقبلات", category: "food" },
+    { word: "حلويات", category: "food" },
+    { word: "آيسكريم", category: "food" },
+    { word: "ماء", category: "food" },
+    { word: "ثلاجة", category: "food" },
+    { word: "فرن", category: "food" },
+    { word: "موقد", category: "food" },
+    { word: "مغسلة", category: "food" },
+    { word: "صحن", category: "food" },
+    { word: "شوكة", category: "food" },
+    { word: "سكين", category: "food" },
+    { word: "ملعقة", category: "food" },
+    { word: "كوب", category: "food" },
+    { word: "زجاجة", category: "food" },
+    { word: "علبة", category: "food" },
+    { word: "مندي", category: "food" },
+    { word: "برياني", category: "food" },
+    { word: "مقلوبة", category: "food" },
+    { word: "مسخن", category: "food" },
+    { word: "منسف", category: "food" },
+    { word: "فتة", category: "food" },
+    { word: "متبل", category: "food" },
+    { word: "بابا غنوج", category: "food" },
+    { word: "ورق عنب", category: "food" },
+    { word: "محشي", category: "food" },
+    { word: "كوسا", category: "food" },
+    { word: "بامية", category: "food" },
+    { word: "شوربة", category: "food" },
+    { word: "تنور", category: "food" },
+    { word: "صاج", category: "food" },
+    { word: "زيتون", category: "food" },
+    { word: "زعتر", category: "food" },
+    { word: "معجنات", category: "food" },
+    { word: "مناقيش", category: "food" },
+    { word: "فطائر", category: "food" },
+    { word: "سمبوسة", category: "food" },
+    { word: "قطايف", category: "food" },
+    { word: "بقلاوة", category: "food" },
+    { word: "لقيمات", category: "food" },
+    { word: "معمول", category: "food" },
+    { word: "غريبة", category: "food" },
+    { word: "تمر", category: "food" },
+    { word: "نعناع", category: "food" },
+    { word: "كرك", category: "food" },
+    { word: "سحلب", category: "food" },
+    { word: "قمر الدين", category: "food" },
+    { word: "تمر هندي", category: "food" },
+    { word: "فهاوة", category: "food" },
+    { word: "بيبسي", category: "food" },
+    { word: "كوكاكولا", category: "food" },
+    { word: "سفن أب", category: "food" },
+    { word: "ريد بول", category: "food" },
+    { word: "نسكافيه", category: "food" },
+    { word: "كابتشينو", category: "food" },
+    { word: "مايونيز", category: "food" },
+    { word: "كاتشب", category: "food" },
+    { word: "جبنة", category: "food" },
+    { word: "كرافت", category: "food" },
+    { word: "المراعي", category: "food" },
+    { word: "شيبس", category: "food" },
+    { word: "سنكرز", category: "food" },
+    { word: "مارشملو", category: "food" },
+    { word: "نوتيلا", category: "food" },
+    { word: "كندر", category: "food" },
+    { word: "كبسة", category: "food" },
+    { word: "طعمية", category: "food" },
+    { word: "كفتة", category: "food" },
+    { word: "كباب", category: "food" },
+    { word: "كنتاكي", category: "food" },
+    { word: "البيك", category: "food" },
+    { word: "ستاربكس", category: "food" },
+    { word: "اندومي", category: "food" },
+    
+    // ========== الرياضة (sports) ==========
+    { word: "رياضة", category: "sports" },
+    { word: "كرة", category: "sports" },
+    { word: "ملعب", category: "sports" },
+    { word: "فريق", category: "sports" },
+    { word: "مباراة", category: "sports" },
+    { word: "هدف", category: "sports" },
+    { word: "جائزة", category: "sports" },
+    { word: "تحدي", category: "sports" },
+    { word: "صلاح", category: "sports" },
+    { word: "ميسي", category: "sports" },
+    { word: "رونالدو", category: "sports" },
+    { word: "كريستيانو", category: "sports" },
+    { word: "بيليه", category: "sports" },
+    { word: "مارادونا", category: "sports" },
+    { word: "زيدان", category: "sports" },
+    
+    // ========== العائلة (family) ==========
+    { word: "عائلة", category: "family" },
+    { word: "أب", category: "family" },
+    { word: "أم", category: "family" },
+    { word: "أخ", category: "family" },
+    { word: "أخت", category: "family" },
+    { word: "جد", category: "family" },
+    { word: "جدة", category: "family" },
+    { word: "طفل", category: "family" },
+    { word: "محمد", category: "family" },
+    { word: "أحمد", category: "family" },
+    { word: "خالد", category: "family" },
+    { word: "سارة", category: "family" },
+    { word: "فاطمة", category: "family" },
+    { word: "مريم", category: "family" },
+    { word: "نادين", category: "family" },
+    
+    // ========== المدرسة (school) ==========
+    { word: "طالب", category: "school" },
+    { word: "معلم", category: "school" },
+    { word: "دفتر", category: "school" },
+    { word: "قلم", category: "school" },
+    { word: "ممحاة", category: "school" },
+    { word: "كتاب", category: "school" },
+    { word: "قصة", category: "school" },
+    { word: "رواية", category: "school" },
+    { word: "شعر", category: "school" },
+    { word: "أدب", category: "school" },
+    { word: "علم", category: "school" },
+    { word: "معرفة", category: "school" },
+    { word: "تفكير", category: "school" },
+    { word: "ذاكرة", category: "school" },
+    { word: "فهم", category: "school" },
+    { word: "جهل", category: "school" },
+    { word: "سؤال", category: "school" },
+    { word: "جواب", category: "school" },
+    { word: "قرار", category: "school" },
+    { word: "خطة", category: "school" },
+    { word: "بحث", category: "school" },
+    { word: "مختبر", category: "school" },
+    { word: "عينة", category: "school" },
+    { word: "بيانات", category: "school" },
+    { word: "إحصاء", category: "school" },
+    { word: "نظرية", category: "school" },
+    { word: "فرضية", category: "school" },
+    { word: "نتيجة", category: "school" },
+    { word: "استنتاج", category: "school" },
+    
+    // ========== العمل (work) ==========
+    { word: "عمل", category: "work" },
+    { word: "وظيفة", category: "work" },
+    { word: "رئيس", category: "work" },
+    { word: "موظف", category: "work" },
+    { word: "راتب", category: "work" },
+    { word: "إجازة", category: "work" },
+    { word: "مهارة", category: "work" },
+    { word: "خبرة", category: "work" },
+    { word: "سيرة", category: "work" },
+    { word: "مقابلة", category: "work" },
+    { word: "ترقية", category: "work" },
+    { word: "تقاعد", category: "work" },
+    { word: "معاش", category: "work" },
+    { word: "عقد", category: "work" },
+    { word: "اتفاق", category: "work" },
+    { word: "توظيف", category: "work" },
+    { word: "تدريب", category: "work" },
+    
+    // ========== الصحة (health) ==========
+    { word: "صحة", category: "health" },
+    { word: "مرض", category: "health" },
+    { word: "دواء", category: "health" },
+    { word: "طبيب", category: "health" },
+    { word: "ممرض", category: "health" },
+    { word: "جراحة", category: "health" },
+    { word: "علاج", category: "health" },
+    { word: "قابلة", category: "health" },
+    { word: "جراح", category: "health" },
+    { word: "أخصائي", category: "health" },
+    
+    // ========== الزمن (time) ==========
+    { word: "زمن", category: "time" },
+    { word: "وقت", category: "time" },
+    { word: "تاريخ", category: "time" },
+    { word: "مستقبل", category: "time" },
+    { word: "حاضر", category: "time" },
+    { word: "ماضي", category: "time" },
+    { word: "عام", category: "time" },
+    { word: "شهر", category: "time" },
+    { word: "أسبوع", category: "time" },
+    { word: "يوم", category: "time" },
+    { word: "ساعة", category: "time" },
+    { word: "دقيقة", category: "time" },
+    { word: "ثانية", category: "time" },
+    { word: "صباح", category: "time" },
+    { word: "مساء", category: "time" },
+    { word: "صيف", category: "time" },
+    { word: "شتاء", category: "time" },
+    { word: "ربيع", category: "time" },
+    { word: "خريف", category: "time" },
+    { word: "موسم", category: "time" },
+    
+    // ========== الصفات (adjectives) ==========
+    { word: "حار", category: "adjectives" },
+    { word: "بارد", category: "adjectives" },
+    { word: "دافئ", category: "adjectives" },
+    { word: "طويل", category: "adjectives" },
+    { word: "قصير", category: "adjectives" },
+    { word: "كبير", category: "adjectives" },
+    { word: "صغير", category: "adjectives" },
+    { word: "سمين", category: "adjectives" },
+    { word: "نحيف", category: "adjectives" },
+    { word: "قوي", category: "adjectives" },
+    { word: "ضعيف", category: "adjectives" },
+    { word: "سعيد", category: "adjectives" },
+    { word: "حزين", category: "adjectives" },
+    { word: "فرح", category: "adjectives" },
+    { word: "غضب", category: "adjectives" },
+    { word: "خوف", category: "adjectives" },
+    { word: "أمل", category: "adjectives" },
+    { word: "حب", category: "adjectives" },
+    { word: "كراهية", category: "adjectives" },
+    { word: "صداقة", category: "adjectives" },
+    { word: "عداوة", category: "adjectives" },
+    { word: "ثقة", category: "adjectives" },
+    { word: "شك", category: "adjectives" },
+    { word: "نجاح", category: "adjectives" },
+    { word: "فشل", category: "adjectives" },
+    { word: "حظ", category: "adjectives" },
+    { word: "قدر", category: "adjectives" },
+    { word: "سرعة", category: "adjectives" },
+    { word: "بطء", category: "adjectives" },
+    { word: "سهولة", category: "adjectives" },
+    { word: "صعوبة", category: "adjectives" },
+    { word: "بساطة", category: "adjectives" },
+    { word: "تعقيد", category: "adjectives" },
+    { word: "بداية", category: "adjectives" },
+    { word: "نهاية", category: "adjectives" },
+    { word: "حلم", category: "adjectives" },
+    { word: "واقع", category: "adjectives" },
+    { word: "خيال", category: "adjectives" },
+    { word: "ابتكار", category: "adjectives" },
+    { word: "اكتشاف", category: "adjectives" },
+    { word: "مزاج", category: "adjectives" },
+    { word: "صداع", category: "adjectives" },
+    { word: "زحمة", category: "adjectives" },
+    { word: "سودة", category: "adjectives" },
+    { word: "نكتة", category: "adjectives" },
+    
+    // ========== التكنولوجيا (tech) ==========
+    { word: "حاسوب", category: "tech" },
+    { word: "لابتوب", category: "tech" },
+    { word: "هاتف", category: "tech" },
+    { word: "سماعة", category: "tech" },
+    { word: "طابعة", category: "tech" },
+    { word: "راوتر", category: "tech" },
+    { word: "شبكة", category: "tech" },
+    { word: "موقع", category: "tech" },
+    { word: "تطبيق", category: "tech" },
+    { word: "بريد", category: "tech" },
+    { word: "خادم", category: "tech" },
+    { word: "برمجة", category: "tech" },
+    { word: "خوارزمية", category: "tech" },
+    { word: "ذكاء", category: "tech" },
+    { word: "روبوت", category: "tech" },
+    { word: "كاميرا", category: "tech" },
+    { word: "فيلم", category: "tech" },
+    { word: "مسرح", category: "tech" },
+    { word: "رقص", category: "tech" },
+    { word: "غناء", category: "tech" },
+    { word: "آيفون", category: "tech" },
+    { word: "سامسونج", category: "tech" },
+    { word: "هواوي", category: "tech" },
+    { word: "شاومي", category: "tech" },
+    { word: "ويندوز", category: "tech" },
+    { word: "اندرويد", category: "tech" },
+    { word: "آيباد", category: "tech" },
+    { word: "ويب", category: "tech" },
+    { word: "الروليت", category: "tech" },
+    { word: "تيك توك", category: "tech" },
+    { word: "يوتيوب", category: "tech" },
+    { word: "فيسبوك", category: "tech" },
+    { word: "انستغرام", category: "tech" },
+    { word: "سناب شات", category: "tech" },
+    { word: "واتساب", category: "tech" },
+    { word: "تويتر", category: "tech" },
+    { word: "تلجرام", category: "tech" },
+    { word: "نتفليكس", category: "tech" },
+    { word: "شاهد", category: "tech" },
+    { word: "أمازون", category: "tech" },
+    { word: "جوجل", category: "tech" },
+    { word: "بلايستيشن", category: "tech" },
+    { word: "نينتندو", category: "tech" },
+    
+    // ========== السياسة (politics) ==========
+    { word: "سياسة", category: "politics" },
+    { word: "حكومة", category: "politics" },
+    { word: "انتخابات", category: "politics" },
+    { word: "دستور", category: "politics" },
+    { word: "برلمان", category: "politics" },
+    { word: "وزير", category: "politics" },
+    { word: "دبلوماسية", category: "politics" },
+    { word: "سفارة", category: "politics" },
+    { word: "ترامب", category: "politics" },
+    { word: "بايدن", category: "politics" },
+    { word: "اوباما", category: "politics" },
+    { word: "صدام", category: "politics" },
+    { word: "جيفارا", category: "politics" },
+    { word: "نابليون", category: "politics" },
+    { word: "يوليوس قيصر", category: "politics" },
+    
+    // ========== الاقتصاد (economy) ==========
+    { word: "اقتصاد", category: "economy" },
+    { word: "سهم", category: "economy" },
+    { word: "بنك", category: "economy" },
+    { word: "عملة", category: "economy" },
+    { word: "ميزانية", category: "economy" },
+    { word: "ضرائب", category: "economy" },
+    { word: "تجارة", category: "economy" },
+    { word: "مشروع", category: "economy" },
+    { word: "استثمار", category: "economy" },
+    { word: "فاتورة", category: "economy" },
+    { word: "كاشير", category: "economy" },
+    { word: "مخابرات", category: "economy" },
+    
+    // ========== الإعلام (media) ==========
+    { word: "إعلام", category: "media" },
+    { word: "صحافة", category: "media" },
+    { word: "مقال", category: "media" },
+    { word: "خبر", category: "media" },
+    { word: "مذيع", category: "media" },
+    { word: "قناة", category: "media" },
+    { word: "راديو", category: "media" },
+    { word: "تلفاز", category: "media" },
+    { word: "مدونة", category: "media" },
+    { word: "بودكاست", category: "media" },
+    { word: "إعلان", category: "media" },
+    { word: "شعار", category: "media" },
+    
+    // ========== الفن (art) ==========
+    { word: "فن", category: "art" },
+    { word: "موسيقى", category: "art" },
+    { word: "رسم", category: "art" },
+    { word: "صورة", category: "art" },
+    { word: "لون", category: "art" },
+    { word: "فرشاة", category: "art" },
+    { word: "تصميم", category: "art" },
+    { word: "خط", category: "art" },
+    { word: "طباعة", category: "art" },
+    { word: "موسيقي", category: "art" },
+    { word: "عازف", category: "art" },
+    { word: "مطرب", category: "art" },
+    { word: "مغنية", category: "art" },
+    { word: "فرقة", category: "art" },
+    { word: "بيانو", category: "art" },
+    { word: "غيتار", category: "art" },
+    { word: "كمان", category: "art" },
+    { word: "طبلة", category: "art" },
+    { word: "إيقاع", category: "art" },
+    { word: "لحن", category: "art" },
+    { word: "نغمة", category: "art" },
+    { word: "كورس", category: "art" },
+    
+    // ========== الأدوات (tools) ==========
+    { word: "مطرقة", category: "tools" },
+    { word: "محراث", category: "tools" },
+    { word: "مسطرة", category: "tools" },
+    { word: "محفظة", category: "tools" },
+    { word: "منديل", category: "tools" },
+    { word: "مرجل", category: "tools" },
+    { word: "مصعد", category: "tools" },
+    { word: "مروحة", category: "tools" },
+    { word: "مغناطيس", category: "tools" },
+    { word: "محبرة", category: "tools" },
+    { word: "منشفة", category: "tools" },
+    { word: "فطيرة", category: "tools" },
+    { word: "مقلاة", category: "tools" },
+    { word: "مصباح", category: "tools" },
+    { word: "مفتاح", category: "tools" },
+    { word: "مرآة", category: "tools" },
+    { word: "صندوق", category: "tools" },
+    { word: "رف", category: "tools" },
+    { word: "خزانة", category: "tools" },
+    { word: "سرير", category: "tools" },
+    { word: "كرسي", category: "tools" },
+    { word: "طاولة", category: "tools" },
+    { word: "أريكة", category: "tools" },
+    { word: "وسادة", category: "tools" },
+    { word: "بطانية", category: "tools" },
+    { word: "سلك", category: "tools" },
+    { word: "مفك", category: "tools" },
+    { word: "مسمار", category: "tools" },
+    { word: "برغي", category: "tools" },
+    { word: "قفل", category: "tools" },
+    { word: "مكنسة", category: "tools" },
+    { word: "جردل", category: "tools" },
+    { word: "مخدة", category: "tools" },
+    { word: "لحاف", category: "tools" },
+    { word: "شرشف", category: "tools" },
+    { word: "كرسي حمام", category: "tools" },
+    
+    // ========== المهن (professions) ==========
+    { word: "نجار", category: "professions" },
+    { word: "حداد", category: "professions" },
+    { word: "خياط", category: "professions" },
+    { word: "صيدلي", category: "professions" },
+    { word: "محام", category: "professions" },
+    { word: "قاض", category: "professions" },
+    { word: "مترجم", category: "professions" },
+    { word: "مزارع", category: "professions" },
+    { word: "بحار", category: "professions" },
+    { word: "طيار", category: "professions" },
+    { word: "مصمم", category: "professions" },
+    { word: "مبرمج", category: "professions" },
+    { word: "مصور", category: "professions" },
+    { word: "مغن", category: "professions" },
+    { word: "مهندس", category: "professions" },
+    { word: "سائق", category: "professions" },
+    { word: "نادل", category: "professions" },
+    { word: "بواب", category: "professions" },
+    { word: "سباك", category: "professions" },
+    { word: "كهربائي", category: "professions" },
+    { word: "كاهن", category: "professions" },
+    { word: "راهب", category: "professions" },
+    { word: "إمام", category: "professions" },
+    
+    // ========== الحيوانات (animals) ==========
+    { word: "قطة", category: "animals" },
+    { word: "كلب", category: "animals" },
+    { word: "حصان", category: "animals" },
+    { word: "نمر", category: "animals" },
+    { word: "غزال", category: "animals" },
+    { word: "ببغاء", category: "animals" },
+    { word: "سنجاب", category: "animals" },
+    { word: "قنفذ", category: "animals" },
+    { word: "تمساح", category: "animals" },
+    { word: "دلفين", category: "animals" },
+    { word: "حوت", category: "animals" },
+    { word: "سلحفاة", category: "animals" },
+    { word: "عقرب", category: "animals" },
+    { word: "ثعلب", category: "animals" },
+    { word: "ذئب", category: "animals" },
+    
+    // ========== النباتات (plants) ==========
+    { word: "نخيل", category: "plants" },
+    { word: "سرو", category: "plants" },
+    { word: "لبلاب", category: "plants" },
+    { word: "أقحوان", category: "plants" },
+    { word: "بندق", category: "plants" },
+    
+    // ========== الأديان (religion) ==========
+    { word: "صوم", category: "religion" },
+    { word: "صلاة", category: "religion" },
+    { word: "زكاة", category: "religion" },
+    { word: "حج", category: "religion" },
+    { word: "عمرة", category: "religion" },
+    { word: "رمضان", category: "religion" },
+    { word: "شعبان", category: "religion" },
+    { word: "شوال", category: "religion" },
+    { word: "عيدفطر", category: "religion" },
+    { word: "أضحى", category: "religion" },
+    { word: "سحور", category: "religion" },
+    { word: "إفطار", category: "religion" },
+    { word: "زينة", category: "religion" },
+    { word: "فانوس", category: "religion" },
+    { word: "مدفع", category: "religion" },
+    { word: "مسحراتي", category: "religion" },
+    { word: "أنبياء", category: "religion" },
+    { word: "عيسى", category: "religion" },
+    { word: "موسى", category: "religion" },
+    { word: "نوح", category: "religion" },
+    { word: "ابراهيم", category: "religion" },
+    { word: "صحابة", category: "religion" },
+    { word: "خلفاء", category: "religion" },
+    
+    // ========== التاريخ (history) ==========
+    { word: "القسطنطينية", category: "history" },
+    { word: "الأندلس", category: "history" },
+    { word: "صليبيون", category: "history" },
+    { word: "مغول", category: "history" },
+    { word: "مماليك", category: "history" },
+    { word: "فراعنة", category: "history" },
+    { word: "توت عنخ آمون", category: "history" },
+    { word: "ابو الهول", category: "history" },
+    { word: "هرم", category: "history" },
+    { word: "يونان", category: "history" },
+    { word: "رومان", category: "history" },
+    
+    // ========== الجريمة (crime) ==========
+    { word: "سرقة", category: "crime" },
+    { word: "حرامي", category: "crime" },
+    { word: "نصاب", category: "crime" },
+    { word: "بلطجي", category: "crime" },
+    { word: "مافيا", category: "crime" },
+    { word: "عصابات", category: "crime" },
+    { word: "جاسوس", category: "crime" },
+    { word: "خيانة", category: "crime" },
+    { word: "سجن", category: "crime" },
+    { word: "اعدام", category: "crime" },
+    { word: "شنق", category: "crime" },
+    { word: "رصاص", category: "crime" },
+    { word: "دم", category: "crime" },
+    { word: "جثة", category: "crime" },
+    { word: "ميت", category: "crime" },
+    { word: "قتل", category: "crime" },
+    { word: "جريمة", category: "crime" },
+    { word: "بوليس", category: "crime" },
+    { word: "مباحث", category: "crime" },
+    { word: "أمن دولة", category: "crime" },
+    { word: "انقلاب", category: "crime" },
+    { word: "ارهابي", category: "crime" },
+    { word: "داعش", category: "crime" },
+    { word: "القاعدة", category: "crime" },
+    { word: "طالبان", category: "crime" },
+    { word: "حزب الله", category: "crime" },
+    { word: "حماس", category: "crime" },
+    { word: "جهاد", category: "crime" },
+    { word: "تفجير", category: "crime" },
+    { word: "قنبلة", category: "crime" },
+    { word: "صاروخ", category: "crime" },
+    { word: "دبابة", category: "crime" },
+    { word: "كلاشنكوف", category: "crime" },
+    { word: "مسدس", category: "crime" },
+    { word: "فرد", category: "crime" },
+    { word: "رصاصة", category: "crime" },
+    { word: "طلقة", category: "crime" },
+    { word: "مخدرات", category: "crime" },
+    { word: "ترامادول", category: "crime" },
+    { word: "قات", category: "crime" },
+    { word: "خمور", category: "crime" },
+    { word: "قمار", category: "crime" },
+    { word: "ربا", category: "crime" },
+    { word: "فوائد", category: "crime" },
+    
+    // ========== متنوع (misc) ==========
+    { word: "الفاتيكان", category: "misc" },
+    { word: "رصيف", category: "misc" },
+    { word: "مداهمة", category: "misc" },
+    { word: "سبيستون", category: "misc" },
+    { word: "كونان", category: "misc" },
+    { word: "ون بيس", category: "misc" },
+    { word: "ناروتو", category: "misc" },
+    { word: "دلع", category: "misc" },
+    { word: "غنج", category: "misc" },
+    { word: "لقافة", category: "misc" },
+    { word: "تنمر", category: "misc" },
+    { word: "كزبرة", category: "misc" },
+    { word: "كمون", category: "misc" },
+    { word: "عطارد", category: "misc" },
+    { word: "المشتري", category: "misc" },
+    { word: "زحل", category: "misc" },
+    { word: "نبتون", category: "misc" },
+    { word: "كنترول", category: "misc" },
+    { word: "ماندو", category: "misc" },
+    { word: "عمرو", category: "misc" },
+    { word: "هيفاء", category: "misc" },
+    { word: "أحلام", category: "misc" },
+    { word: "نانسي", category: "misc" },
+    { word: "عبده", category: "misc" },
+    { word: "محمد هنيدي", category: "misc" },
+    { word: "كاظم", category: "misc" },
+    { word: "اينشتاين", category: "misc" },
+    { word: "نيوتن", category: "misc" },
+    { word: "أديسون", category: "misc" },
+    { word: "تيسلا", category: "misc" },
+    { word: "مكياج", category: "misc" },
+    { word: "مصر", category: "misc" },
+    { word: "السعودية", category: "misc" },
+    { word: "الإمارات", category: "misc" },
+    { word: "قطر", category: "misc" },
+    { word: "الكويت", category: "misc" },
+    { word: "اليمن", category: "misc" },
+    { word: "صنعاء", category: "misc" },
+    { word: "سوريا", category: "misc" },
+    { word: "لبنان", category: "misc" },
+    { word: "بيروت", category: "misc" },
+    { word: "الأردن", category: "misc" },
+    { word: "فلسطين", category: "misc" },
+    { word: "القدس", category: "misc" },
+    { word: "العراق", category: "misc" },
+    { word: "ليبيا", category: "misc" },
+    { word: "طرابلس", category: "misc" },
+    { word: "تونس", category: "misc" },
+    { word: "الجزائر", category: "misc" },
+    { word: "المغرب", category: "misc" },
+    { word: "السودان", category: "misc" },
+    { word: "الصين", category: "misc" },
+    { word: "أمريكا", category: "misc" },
+    { word: "واشنطن", category: "misc" },
+    { word: "نيويورك", category: "misc" },
+    { word: "فرنسا", category: "misc" },
+    { word: "باريس", category: "misc" },
+    { word: "بريطانيا", category: "misc" },
+    { word: "لندن", category: "misc" },
+    { word: "روسيا", category: "misc" },
+    { word: "موسكو", category: "misc" },
+    { word: "ألمانيا", category: "misc" },
+    { word: "برلين", category: "misc" },
+    { word: "إيطاليا", category: "misc" },
+    { word: "روما", category: "misc" },
+    { word: "أسبانيا", category: "misc" },
+    { word: "برشلونة", category: "misc" },
+    { word: "مدريد", category: "misc" },
+    { word: "تركيا", category: "misc" },
+    { word: "اسطنبول", category: "misc" },
+    { word: "إيران", category: "misc" },
+    { word: "طهران", category: "misc" },
+    { word: "اليابان", category: "misc" },
+    { word: "طوكيو", category: "misc" },
+    { word: "كرواتيا", category: "misc" },
+    { word: "طاجيكستان", category: "misc" },
+    { word: "أذربيجان", category: "misc" },
+    { word: "ميكانيكا", category: "misc" },
+    { word: "بنشر", category: "misc" },
+    { word: "اكشن", category: "misc" },
+    { word: "جيران", category: "misc" },
+    { word: "عمارة", category: "misc" },
+    { word: "سطوح", category: "misc" },
+    { word: "بدروم", category: "misc" },
+    { word: "كراج", category: "misc" },
+    { word: "شيطان", category: "misc" },
+    { word: "ابليس", category: "misc" },
+    { word: "عفريت", category: "misc" },
+    { word: "جن", category: "misc" },
+    { word: "ماسونية", category: "misc" },
+    { word: "دجال", category: "misc" },
+    { word: "مسيح", category: "misc" },
+    { word: "مهدي", category: "misc" },
+    { word: "كوكايين", category: "misc" },
+    { word: "هيروين", category: "misc" },
+    { word: "الكونجرس", category: "misc" },
+    { word: "ميته", category: "misc" },
+    { word: "ديسكو", category: "misc" },
+    { word: "اوتوكاد", category: "misc" },
+    { word: "نونو", category: "misc" },
+    { word: "مأذنة", category: "misc" },
+    { word: "قُبة", category: "misc" },
+    { word: "منارة", category: "misc" }
 ];
 
         // متغيرات اللعبة
-        let gameWords = [];
+        let gameWords = []; // الآن array من {word, category}
         let wordColors = []; // 0: أحمر, 1: أزرق, 2: أصفر, 3: أسود
         let revealedCards = [];
         let currentTeam = 'red'; // 'red' أو 'blue'
@@ -816,13 +1550,115 @@
         const copyRedTeamBtn = document.getElementById('copy-red-team-btn');
         const copyBlueTeamBtn = document.getElementById('copy-blue-team-btn');
 
-        // تهيئة اللعبة
-        function initGame() {
-            // إنشاء مجموعة عشوائية من 24 كلمة
-            gameWords = getRandomWords(24);
+        // ==================== دوال تحسين التوازن باستخدام الفئات ====================
+        
+        // دالة اختيار عشوائي متوازن للكلمات مع مراعاة الفئات
+        function generateBalancedGame() {
+            const maxAttempts = 50; // عدد محاولات توليد توزيع مقبول
             
-            // تعيين الألوان عشوائياً
-            assignRandomColors();
+            for (let attempt = 0; attempt < maxAttempts; attempt++) {
+                // اختيار 24 كلمة عشوائية من قاعدة البيانات
+                const shuffled = [...wordsDatabase].sort(() => 0.5 - Math.random());
+                const candidateWords = shuffled.slice(0, 24);
+                
+                // توليد ألوان عشوائية (8 أحمر، 8 أزرق، 7 أصفر، 1 أسود)
+                let candidateColors = [
+                    ...Array(8).fill(0),
+                    ...Array(8).fill(1),
+                    ...Array(7).fill(2),
+                    ...Array(1).fill(3)
+                ];
+                
+                // خلط الألوان
+                for (let i = candidateColors.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [candidateColors[i], candidateColors[j]] = [candidateColors[j], candidateColors[i]];
+                }
+                
+                // فحص التوزيع حسب الفئات (فقط للفريقين الأحمر والأزرق)
+                if (isCategoryDistributionFair(candidateColors, candidateWords)) {
+                    return { words: candidateWords, colors: candidateColors };
+                }
+            }
+            
+            // إذا لم نجد توزيعاً مثالياً، نستخدم آخر توزيع
+            console.log("لم نجد توزيعاً مثالياً، نستخدم آخر توزيع متاح");
+            const fallbackWords = [...wordsDatabase].sort(() => 0.5 - Math.random()).slice(0, 24);
+            let fallbackColors = [
+                ...Array(8).fill(0),
+                ...Array(8).fill(1),
+                ...Array(7).fill(2),
+                ...Array(1).fill(3)
+            ];
+            for (let i = fallbackColors.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [fallbackColors[i], fallbackColors[j]] = [fallbackColors[j], fallbackColors[i]];
+            }
+            return { words: fallbackWords, colors: fallbackColors };
+        }
+
+        // دالة فحص توزيع الفئات بين الفرق (المحايد والقاتل بدون أي قيود)
+        function isCategoryDistributionFair(colors, words) {
+            // إحصائيات الفئات للفريقين فقط (أحمر + أزرق)
+            const redCategories = {};
+            const blueCategories = {};
+            
+            // تجميع عدد الكلمات من كل فئة في الفريقين فقط
+            for (let i = 0; i < 24; i++) {
+                const category = words[i].category;
+                const color = colors[i];
+                
+                if (color === 0) { // أحمر
+                    redCategories[category] = (redCategories[category] || 0) + 1;
+                } else if (color === 1) { // أزرق
+                    blueCategories[category] = (blueCategories[category] || 0) + 1;
+                }
+                // الأصفر (محايد) والأسود (قاتل) لا نضع عليهما أي قيود إطلاقاً
+            }
+            
+            // 1. لا يزيد عن كلمتين من نفس الفئة في الفريق الواحد (للأحمر والأزرق فقط)
+            for (const category in redCategories) {
+                if (redCategories[category] > 2) return false;
+            }
+            for (const category in blueCategories) {
+                if (blueCategories[category] > 2) return false;
+            }
+            
+            // 2. الفرق في عدد الفئات الممثلة بين الفريقين لا يزيد عن 2
+            const redUniqueCategories = Object.keys(redCategories).length;
+            const blueUniqueCategories = Object.keys(blueCategories).length;
+            if (Math.abs(redUniqueCategories - blueUniqueCategories) > 2) return false;
+            
+            // 3. توزيع متوازن للفئات المشتركة بين الفريقين
+            // إذا ظهرت فئة في كلا الفريقين، الفرق في العدد لا يزيد عن 1
+            const allCategories = new Set([...Object.keys(redCategories), ...Object.keys(blueCategories)]);
+            for (const category of allCategories) {
+                const redCount = redCategories[category] || 0;
+                const blueCount = blueCategories[category] || 0;
+                if (redCount > 0 && blueCount > 0 && Math.abs(redCount - blueCount) > 1) {
+                    return false;
+                }
+            }
+            
+            // لا يوجد أي شروط على الكلمات المحايدة أو القاتلة
+            return true;
+        }
+
+        // دالة لتقدير صعوبة الكلمة (احتفظنا بها للتوافق)
+        function estimateWordDifficulty(word) {
+            let difficulty = 0;
+            if (word.length > 10) difficulty += 2;
+            else if (word.length > 6) difficulty += 1;
+            if (word.includes(' ')) difficulty += 2;
+            return difficulty;
+        }
+
+        // تهيئة اللعبة (معدلة)
+        function initGame() {
+            // استخدام التوليد المتوازن حسب الفئات
+            const balanced = generateBalancedGame();
+            gameWords = balanced.words;
+            wordColors = balanced.colors;
             
             // إعادة تعيين الحالة
             revealedCards = Array(24).fill(false);
@@ -844,23 +1680,20 @@
             teamBlueOption.classList.remove('selected');
         }
 
-        // الحصول على كلمات عشوائية من قاعدة البيانات
+        // الحصول على كلمات عشوائية من قاعدة البيانات (للتوافق)
         function getRandomWords(count) {
             const shuffled = [...wordsDatabase].sort(() => 0.5 - Math.random());
             return shuffled.slice(0, count);
         }
 
-        // تعيين الألوان عشوائياً للكلمات
+        // تعيين الألوان عشوائياً للكلمات (لم تعد تستخدم مباشرة)
         function assignRandomColors() {
-            // 8 أحمر، 8 أزرق، 7 أصفر، 1 أسود
             wordColors = [
-                ...Array(8).fill(0),  // أحمر
-                ...Array(8).fill(1),  // أزرق
-                ...Array(7).fill(2),  // أصفر
-                ...Array(1).fill(3)   // أسود
+                ...Array(8).fill(0),
+                ...Array(8).fill(1),
+                ...Array(7).fill(2),
+                ...Array(1).fill(3)
             ];
-            
-            // خلط الألوان عشوائياً
             for (let i = wordColors.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
                 [wordColors[i], wordColors[j]] = [wordColors[j], wordColors[i]];
@@ -869,26 +1702,19 @@
 
         // دالة لتحديد كيفية عرض الكلمة
         function formatWordDisplay(word) {
-            // التحقق إذا كانت الكلمة تحتوي على مسافات (كلمات متعددة)
             if (/\s/.test(word)) {
-                // تقسيم الكلمات وإضافتها في spans منفصلة
                 const words = word.split(/\s+/);
                 let displayHTML = '';
-                
-                // إضافة كل كلمة في سطر منفصل
                 words.forEach((w, index) => {
                     if (index > 0) displayHTML += '<br>';
                     displayHTML += `<span>${w}</span>`;
                 });
-                
                 return {
                     displayText: displayHTML,
                     cssClass: 'multi-word'
                 };
             }
             
-            // إذا كانت كلمة مفردة
-            // تقليل حجم الخط بناءً على طول الكلمة
             if (word.length > 12) {
                 return {
                     displayText: word,
@@ -911,38 +1737,28 @@
         function updateGameBoard() {
             wordsGrid.innerHTML = '';
             
-            gameWords.forEach((word, index) => {
+            gameWords.forEach((item, index) => {
+                const word = item.word;
                 const card = document.createElement('div');
                 card.className = 'word-card';
                 
-                // تنسيق عرض الكلمة
                 const {displayText, cssClass} = formatWordDisplay(word);
                 card.innerHTML = displayText;
                 card.title = word;
                 
-                // إضافة الفئة المناسبة لعرض النص
                 if (cssClass) {
                     card.classList.add(cssClass);
                 }
                 
-                // إضافة لون الكلمة
                 if (revealedCards[index]) {
                     card.classList.add('revealed');
                 }
                 
                 switch(wordColors[index]) {
-                    case 0: // أحمر
-                        card.classList.add('red');
-                        break;
-                    case 1: // أزرق
-                        card.classList.add('blue');
-                        break;
-                    case 2: // أصفر
-                        card.classList.add('yellow');
-                        break;
-                    case 3: // أسود
-                        card.classList.add('black');
-                        break;
+                    case 0: card.classList.add('red'); break;
+                    case 1: card.classList.add('blue'); break;
+                    case 2: card.classList.add('yellow'); break;
+                    case 3: card.classList.add('black'); break;
                 }
                 
                 card.dataset.index = index;
@@ -954,7 +1770,6 @@
 
         // تحديث حالة اللعبة
         function updateGameStatus() {
-            // حساب الكلمات المتبقية
             redWordsRemaining = 0;
             blueWordsRemaining = 0;
             let totalRemaining = 0;
@@ -962,22 +1777,18 @@
             for (let i = 0; i < 24; i++) {
                 if (!revealedCards[i]) {
                     totalRemaining++;
-                    
                     if (wordColors[i] === 0) redWordsRemaining++;
                     if (wordColors[i] === 1) blueWordsRemaining++;
                 }
             }
             
-            // تحديث العدادات
             redCount.textContent = redWordsRemaining;
             blueCount.textContent = blueWordsRemaining;
             remainingWords.textContent = totalRemaining;
             
-            // تحديث الدور الحالي
             currentTurn.textContent = currentTeam === 'red' ? '🔴' : '🔵';
             currentTurn.className = currentTeam === 'red' ? 'status-value red' : 'status-value blue';
             
-            // التحقق من فوز فريق
             checkWinCondition();
         }
 
@@ -988,11 +1799,9 @@
             revealedCards[index] = true;
             const color = wordColors[index];
             
-            // تحديث اللوحة
             updateGameBoard();
             
-            // التحقق من النتيجة
-            if (color === 3) { // كلمة سوداء (قاتلة)
+            if (color === 3) {
                 gameActive = false;
                 const winner = currentTeam === 'red' ? 'الأزرق' : 'الأحمر';
                 gameAlert.className = "alert alert-danger";
@@ -1000,29 +1809,22 @@
                 highlightWinningTeam(winner);
             } 
             else if ((color === 0 && currentTeam === 'blue') || (color === 1 && currentTeam === 'red')) {
-                // اختيار خاطئ - تغيير الدور
                 currentTeam = currentTeam === 'red' ? 'blue' : 'red';
                 gameAlert.className = "alert alert-warning";
                 gameAlert.innerHTML = `<i class="fas fa-exchange-alt"></i><span>اختيار خاطئ! الدور الآن للفريق ${currentTeam === 'red' ? 'الأحمر' : 'الأزرق'}.</span>`;
-                
-                // تحديث اختيار الفريق
                 updateTeamSelection();
             } 
             else if ((color === 0 && currentTeam === 'red') || (color === 1 && currentTeam === 'blue')) {
-                // اختيار صحيح
                 gameAlert.className = "alert alert-success";
                 gameAlert.innerHTML = `<i class="fas fa-check-circle"></i><span>اختيار صحيح! استمر الفريق ${currentTeam === 'red' ? 'الأحمر' : 'الأزرق'}.</span>`;
             }
-            else if (color === 2) { // كلمة محايدة
+            else if (color === 2) {
                 currentTeam = currentTeam === 'red' ? 'blue' : 'red';
                 gameAlert.className = "alert alert-warning";
                 gameAlert.innerHTML = `<i class="fas fa-exchange-alt"></i><span>كلمة محايدة! الدور الآن للفريق ${currentTeam === 'red' ? 'الأحمر' : 'الأزرق'}.</span>`;
-                
-                // تحديث اختيار الفريق
                 updateTeamSelection();
             }
             
-            // تحديث حالة اللعبة
             updateGameStatus();
         }
 
@@ -1076,8 +1878,8 @@
 خريطة الكلمات للاعبيين (العملاء)
 `;
             
-            gameWords.forEach((word, index) => {
-                text += `${index + 1}) ${word}  \n`;
+            gameWords.forEach((item, index) => {
+                text += `${index + 1}) ${item.word}  \n`;
             });
             
             text += `------------------
@@ -1087,32 +1889,22 @@
             showCopyAlert();
         }
 
-        // نسخ خريطة الجواسيس بالترتيب الجديد
+        // نسخ خريطة الجواسيس
         function copySpymasterMap() {
-            // جمع الكلمات حسب أنواعها
             const redWords = [];
             const blueWords = [];
             const yellowWords = [];
             const blackWords = [];
             
-            // تجميع الكلمات حسب اللون
-            gameWords.forEach((word, index) => {
+            gameWords.forEach((item, index) => {
                 const color = wordColors[index];
                 const emoji = getColorEmoji(color);
                 
                 switch(color) {
-                    case 0: // أحمر
-                        redWords.push({word, emoji});
-                        break;
-                    case 1: // أزرق
-                        blueWords.push({word, emoji});
-                        break;
-                    case 2: // أصفر
-                        yellowWords.push({word, emoji});
-                        break;
-                    case 3: // أسود
-                        blackWords.push({word, emoji});
-                        break;
+                    case 0: redWords.push({word: item.word, emoji}); break;
+                    case 1: blueWords.push({word: item.word, emoji}); break;
+                    case 2: yellowWords.push({word: item.word, emoji}); break;
+                    case 3: blackWords.push({word: item.word, emoji}); break;
                 }
             });
             
@@ -1122,8 +1914,6 @@
 خريطة الكلمات للجواسيس (الشارح)
 `;
             
-            // عرض كلمات الفريق الأحمر مع الفريق الأزرق جنباً إلى جنب
-            // كل سطر يحتوي على كلمة حمراء وكلمة زرقاء
             const maxPairs = Math.max(redWords.length, blueWords.length);
             
             for (let i = 0; i < maxPairs; i++) {
@@ -1139,7 +1929,6 @@
                 }
             }
             
-            // عرض الكلمات الصفراء (المحايدة) - كل سطر يحتوي على كلمتين
             for (let i = 0; i < yellowWords.length; i += 2) {
                 const yellowWord1 = yellowWords[i] ? `${yellowWords[i].word} ${yellowWords[i].emoji}` : "";
                 const yellowWord2 = yellowWords[i + 1] ? `${yellowWords[i + 1].word} ${yellowWords[i + 1].emoji}` : "";
@@ -1151,7 +1940,6 @@
                 }
             }
             
-            // عرض الكلمات السوداء (القاتلة)
             blackWords.forEach(blackWord => {
                 text += `(${blackWord.word} ${blackWord.emoji})\n`;
             });
@@ -1163,50 +1951,52 @@
             showCopyAlert();
         }
 
-        // نسخ كلمات فريق الأحمر فقط
+        // نسخ كلمات فريق الأحمر فقط (المتبقية فقط!)
         function copyRedTeamWords() {
             let text = `ألعاب -𖤍|𝐑𝐄𝐃𝐒𝐖𝐎𝐑𝐃
 لعبة كود نيمز
 -----------------------
-كلمات جواسيس الفريق الأحمر فقط 🟥🟥🟥🟥🟥🟥🟥🟥
+كلمات جواسيس الفريق الأحمر المتبقية 🟥🟥🟥🟥🟥🟥🟥🟥
 `;
             
             let redWordCount = 0;
-            gameWords.forEach((word, index) => {
-                if (wordColors[index] === 0) { // أحمر فقط
+            gameWords.forEach((item, index) => {
+                // نختار فقط الكلمات الحمراء غير المكشوفة
+                if (wordColors[index] === 0 && !revealedCards[index]) {
                     redWordCount++;
                     const emoji = getColorEmoji(wordColors[index]);
-                    text += `${redWordCount}) ${word} ${emoji}\n`;
+                    text += `${redWordCount}) ${item.word} ${emoji}\n`;
                 }
             });
             
             text += `------------------
-إجمالي: ${redWordCount} كلمة
+إجمالي المتبقي: ${redWordCount} كلمة
 .،`;
             
             copyToClipboard(text);
             showCopyAlert();
         }
 
-        // نسخ كلمات فريق الأزرق فقط
+        // نسخ كلمات فريق الأزرق فقط (المتبقية فقط!)
         function copyBlueTeamWords() {
             let text = `ألعاب -𖤍|𝐑𝐄𝐃𝐒𝐖𝐎𝐑𝐃
 لعبة كود نيمز
 -----------------------
-كلمات جواسيس الفريق الأزرق فقط 🟦🟦🟦🟦🟦🟦🟦🟦
+كلمات جواسيس الفريق الأزرق المتبقية 🟦🟦🟦🟦🟦🟦🟦🟦
 `;
             
             let blueWordCount = 0;
-            gameWords.forEach((word, index) => {
-                if (wordColors[index] === 1) { // أزرق فقط
+            gameWords.forEach((item, index) => {
+                // نختار فقط الكلمات الزرقاء غير المكشوفة
+                if (wordColors[index] === 1 && !revealedCards[index]) {
                     blueWordCount++;
                     const emoji = getColorEmoji(wordColors[index]);
-                    text += `${blueWordCount}) ${word} ${emoji}\n`;
+                    text += `${blueWordCount}) ${item.word} ${emoji}\n`;
                 }
             });
             
             text += `------------------
-إجمالي: ${blueWordCount} كلمة
+إجمالي المتبقي: ${blueWordCount} كلمة
 .،`;
             
             copyToClipboard(text);
@@ -1269,7 +2059,6 @@
             currentTeam = 'red';
             updateTeamSelection();
             updateGameStatus();
-            
             gameAlert.className = "alert alert-info";
             gameAlert.innerHTML = '<i class="fas fa-info-circle"></i><span>تم تغيير الدور إلى الفريق الأحمر.</span>';
         });
@@ -1279,18 +2068,14 @@
             currentTeam = 'blue';
             updateTeamSelection();
             updateGameStatus();
-            
             gameAlert.className = "alert alert-info";
             gameAlert.innerHTML = '<i class="fas fa-info-circle"></i><span>تم تغيير الدور إلى الفريق الأزرق.</span>';
         });
 
         // بدء لعبة أولية عند تحميل الصفحة
         window.addEventListener('DOMContentLoaded', () => {
-            // عرض رسالة ترحيب
             gameAlert.className = "alert alert-info";
             gameAlert.innerHTML = '<i class="fas fa-info-circle"></i><span>مرحباً بالمضيف! انقر على "بدء لعبة جديدة" لبدء الجولة الأولى.</span>';
-            
-            // إنشاء لعبة أولية
             initGame();
         });
     </script>
